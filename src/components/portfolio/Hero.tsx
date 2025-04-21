@@ -1,76 +1,94 @@
 
-import { Linkedin, Github, FileText } from "lucide-react";
+import { Linkedin, Github, FileText, Database, Server, Cpu, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const highlights = [
-  { label: "Role", value: "Frontend Developer" },
-  { label: "Exp", value: "5+ yrs" },
-  { label: "Stack", value: "React / TS / Node.js" },
-  { label: "Team", value: "7+ Projects" }
+const coreSkills = [
+  { label: "Node.js", icon: <Server className="h-5 w-5 text-portfolio-700" /> },
+  { label: "TypeScript", icon: <Terminal className="h-5 w-5 text-portfolio-700" /> },
+  { label: "SQL / MongoDB", icon: <Database className="h-5 w-5 text-portfolio-700" /> },
+  { label: "API Design", icon: <Cpu className="h-5 w-5 text-portfolio-700" /> },
+  { label: "Testing (Jest)", icon: <Terminal className="h-5 w-5 text-portfolio-700" /> },
+  { label: "Cloud/Deploy", icon: <Server className="h-5 w-5 text-portfolio-700" /> },
 ];
 
-const coreSkills = [
-  "React", "TypeScript", "JavaScript", "Node.js",
-  "Next.js", "Tailwind CSS", "Jest", "Git/GitHub"
+const highlights = [
+  { label: "Experience", value: "5+ yrs", desc: "Professional Engineering" },
+  { label: "Systems Built", value: "30+", desc: "Production Projects" },
+  { label: "Team Projects", value: "10+", desc: "Collaborative Dev" },
+  { label: "Stack", value: "Node, TS, SQL", desc: "Modern Technologies" },
 ];
 
 export function Hero() {
   return (
-    <section id="home" className="min-h-screen flex flex-col justify-center relative overflow-hidden bg-gradient-to-br from-portfolio-50/70 to-white">
-      <div className="container flex flex-col md:flex-row items-center gap-10 py-20">
-        {/* Profile */}
-        <div className="w-full md:w-1/3 flex flex-col items-center md:items-start gap-6 animate-fade-in">
-          <div className="rounded-full overflow-hidden border-4 border-portfolio-200 shadow-lg w-40 h-40 mb-2 bg-gradient-to-tr from-portfolio-100 to-portfolio-300">
-            {/* Placeholder image, replace with actual avatar */}
+    <section id="home" className="min-h-[70vh] pt-28 pb-10 bg-gradient-to-br from-portfolio-50/70 to-white relative overflow-hidden">
+      <div className="container flex flex-col md:flex-row-reverse gap-12 md:gap-16 items-center justify-between">
+        {/* Visual */}
+        <div className="hidden md:flex flex-col items-center flex-1">
+          <div
+            className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-portfolio-200 max-w-xs hover:shadow-portfolio-300 
+              transition-all duration-500 bg-gradient-to-tl from-portfolio-100/90 to-white animate-fade-in"
+          >
             <img
-              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-              alt="Profile"
-              className="w-full h-full object-cover"
+              src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="backend dev setup"
+              className="w-full h-60 object-cover"
             />
+            <div className="absolute top-2 right-2 bg-white/70 px-2 py-1 rounded text-xs text-portfolio-700 font-bold shadow">Backend</div>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold font-heading text-portfolio-700">John Doe</h1>
-          <span className="inline-flex items-center gap-3">
+        </div>
+        {/* Intro & Info */}
+        <div className="flex-1 flex flex-col items-center md:items-start">
+          <div className="mb-3 flex items-center gap-3">
+            <span className="block px-3 py-1 rounded-lg font-bold text-white bg-portfolio-700 shadow text-sm tracking-wide">Back-End Engineer</span>
+            <span className="block px-3 py-1 rounded-lg bg-portfolio-200 text-portfolio-700 font-semibold">Available Now</span>
+          </div>
+          <h1 className="font-bold text-4xl sm:text-5xl text-portfolio-800 mb-2 text-center md:text-left leading-tight">
+            Strong<br />
+            <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-300 bg-clip-text text-transparent">
+              Backend Engineering
+            </span>
+          </h1>
+          <div className="flex gap-3 py-2">
             <a href="https://linkedin.com/in/johndoe" target="_blank" rel="noopener noreferrer"
-              className="bg-portfolio-100 hover:bg-portfolio-200 p-2 rounded-full transition-colors">
-              <Linkedin className="h-6 w-6 text-portfolio-600" />
+              className="bg-portfolio-100 hover:bg-portfolio-200 p-2 rounded-full transition-colors"
+              aria-label="View LinkedIn"
+            >
+              <Linkedin className="h-6 w-6 text-portfolio-700" />
             </a>
             <a href="https://github.com/johndoe" target="_blank" rel="noopener noreferrer"
-              className="bg-portfolio-100 hover:bg-portfolio-200 p-2 rounded-full transition-colors">
-              <Github className="h-6 w-6 text-portfolio-600" />
+              className="bg-portfolio-100 hover:bg-portfolio-200 p-2 rounded-full transition-colors"
+              aria-label="View GitHub"
+            >
+              <Github className="h-6 w-6 text-portfolio-700" />
             </a>
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
               <Button size="sm" variant="outline" className="border-portfolio-600 text-portfolio-700 hover:bg-portfolio-50 font-semibold">
                 <FileText className="h-4 w-4 mr-2" /> Resume
               </Button>
             </a>
-          </span>
-        </div>
-        {/* Quick Summary */}
-        <div className="w-full md:w-2/3 flex flex-col gap-6">
-          <div className="rounded-xl border bg-portfolio-100/60 border-portfolio-200 grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 shadow-sm mb-2 animate-fade-in">
+          </div>
+          <div className="w-full flex flex-wrap gap-4 mt-7 mb-6 justify-center md:justify-start">
+            {coreSkills.map(skill => (
+              <span key={skill.label} className="flex items-center gap-2 bg-portfolio-200/80 text-portfolio-900 px-3 py-1 rounded-lg font-semibold shadow-sm text-sm hover:bg-portfolio-300 border border-portfolio-100 transition-all">
+                {skill.icon} {skill.label}
+              </span>
+            ))}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 w-full max-w-lg mx-auto mb-7">
             {highlights.map(h => (
-              <div key={h.label} className="flex flex-col items-center text-center">
-                <span className="text-xs uppercase text-portfolio-700 font-semibold tracking-wide">{h.label}</span>
-                <span className="text-xl font-bold text-portfolio-800">{h.value}</span>
+              <div key={h.label} className="flex flex-col items-center rounded-xl bg-portfolio-100 border border-portfolio-200 px-4 py-3 shadow-sm hover:shadow-md transition-all text-center">
+                <span className="text-xs uppercase font-semibold text-portfolio-700 tracking-wide">{h.label}</span>
+                <span className="text-2xl font-bold text-portfolio-800 leading-tight">{h.value}</span>
+                <span className="text-xs text-portfolio-700">{h.desc}</span>
               </div>
             ))}
           </div>
-          {/* Core Skills */}
-          <div>
-            <h2 className="text-lg font-bold text-portfolio-700 mb-2 tracking-tight">Core Skills</h2>
-            <div className="flex flex-wrap gap-3">
-              {coreSkills.map(skill => (
-                <span key={skill} className="bg-portfolio-200/80 text-portfolio-900 px-3 py-1 rounded-lg font-semibold shadow-sm text-sm hover:bg-portfolio-300 transition-colors">{skill}</span>
-              ))}
-            </div>
-          </div>
-          {/* Call to Action */}
-          <div className="flex flex-wrap gap-4 pt-4">
+          <div className="flex gap-4 pt-2">
             <Button
               size="lg"
               className="bg-portfolio-700 hover:bg-portfolio-800 text-white font-semibold shadow-md"
               onClick={() => {
-                const el = document.querySelector("#experience");
+                const el = document.querySelector("#projects");
                 if (el) {
                   window.scrollTo({
                     top: el.getBoundingClientRect().top + window.scrollY - 90,
@@ -79,7 +97,7 @@ export function Hero() {
                 }
               }}
             >
-              View Experience
+              See Case Studies
             </Button>
             <Button
               size="lg"
@@ -95,7 +113,7 @@ export function Hero() {
                 }
               }}
             >
-              Contact Me
+              Let's Connect
             </Button>
           </div>
         </div>
