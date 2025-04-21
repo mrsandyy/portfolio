@@ -1,104 +1,81 @@
 
-import { Badge } from "@/components/ui/badge";
-import { Code, Database, Layout, User } from "lucide-react";
+import { Code, Database, Layout, User, Award, Layers, Cpu, PenTool } from "lucide-react";
 
-const skills = [
-  "React", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS",
-  "Node.js", "Express", "MongoDB", "PostgreSQL", "GraphQL", "Next.js",
-  "Git", "CI/CD", "Jest", "Team Collaboration", "Mentorship", "Agile/Scrum"
+const techStack = [
+  { name: "React", icon: <Code className="h-5 w-5 text-portfolio-600" /> },
+  { name: "TypeScript", icon: <PenTool className="h-5 w-5 text-portfolio-600" /> },
+  { name: "Node.js", icon: <Cpu className="h-5 w-5 text-portfolio-600" /> },
+  { name: "Next.js", icon: <Layers className="h-5 w-5 text-portfolio-600" /> },
+  { name: "Tailwind", icon: <Layout className="h-5 w-5 text-portfolio-600" /> },
+  { name: "MongoDB", icon: <Database className="h-5 w-5 text-portfolio-600" /> },
+  { name: "Jest", icon: <Award className="h-5 w-5 text-portfolio-600" /> },
+  { name: "Git", icon: <Code className="h-5 w-5 text-portfolio-600" /> }
 ];
 
-const services = [
+const highlights = [
   {
-    icon: <User className="h-8 w-8 text-portfolio-600" />,
-    title: "Team Player & Collaborator",
-    description: "Effective communicator and supportive team member with proven experience working in cross-functional, international teams."
+    icon: <Award className="h-7 w-7 text-portfolio-700" />,
+    title: "5+ years of professional experience",
   },
   {
-    icon: <Code className="h-8 w-8 text-portfolio-600" />,
-    title: "Frontend Engineering",
-    description: "Focused on maintainable, scalable user interfaces. Write strong, clean, and testable code leveraging modern frameworks."
+    icon: <User className="h-7 w-7 text-portfolio-700" />,
+    title: "Proven team player, mentoring & onboarding juniors",
   },
   {
-    icon: <Database className="h-8 w-8 text-portfolio-600" />,
-    title: "Backend & API Integration",
-    description: "Skilled in building robust APIs and integrating diverse backend technologies in collaborative projects."
+    icon: <Layers className="h-7 w-7 text-portfolio-700" />,
+    title: "Led scalable UI delivery in agile teams",
+  },
+  {
+    icon: <PenTool className="h-7 w-7 text-portfolio-700" />,
+    title: "Strong focus on maintainable, testable code",
   },
 ];
 
 export function About() {
   return (
-    <section id="about" className="py-20 bg-background relative">
+    <section id="about" className="py-12 bg-gradient-to-tr from-white via-portfolio-50 to-portfolio-100">
       <div className="container">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Avatar or Photo */}
-          <div className="aspect-square max-w-md mx-auto md:mx-0 bg-gradient-to-br from-portfolio-100 to-portfolio-300 rounded-2xl overflow-hidden shadow-xl">
-            <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center"></div>
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          {/* Skills & Stack */}
+          <div>
+            <h2 className="text-2xl font-bold text-portfolio-700 mb-3">Technical Skillset</h2>
+            <div className="flex flex-wrap gap-3 mb-6">
+              {techStack.map((skill) => (
+                <span key={skill.name} className="flex items-center gap-1 bg-portfolio-200 text-portfolio-800 px-3 py-1 rounded-full font-medium shadow-sm text-sm hover:bg-portfolio-300">
+                  {skill.icon} {skill.name}
+                </span>
+              ))}
+            </div>
+            <h3 className="text-lg font-semibold mb-2 text-portfolio-700">What Sets Me Apart</h3>
+            <ul className="space-y-2">
+              {highlights.map((hl, i) => (
+                <li key={i} className="flex items-center gap-3 text-portfolio-800">
+                  <span>{hl.icon}</span> <span>{hl.title}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          {/* About content */}
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-sm uppercase tracking-wider text-portfolio-600 font-medium mb-2">About Me</h2>
-              <h3 className="text-3xl font-bold font-heading mb-4">
-                I build usable, reliable, and impactful products in strong teams
-              </h3>
-              <p className="text-muted-foreground mb-6">
-                With 5+ years crafting websites and apps, I thrive in collaborative, agile environments. My focus is on consistent delivery, readable code, and supporting my team. I love learning from others, mentoring juniors, and celebrating success together.
-              </p>
-            </div>
-            {/* Highlights */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-              <div className="bg-background shadow-sm border border-border rounded-lg p-4 text-center">
-                <p className="text-3xl font-bold text-portfolio-600">5+</p>
-                <p className="text-sm text-muted-foreground">Years Experience</p>
+          {/* Visual section / Strengths */}
+          <div className="rounded-xl border-2 border-portfolio-100 bg-white/60 p-8 shadow-md flex flex-col items-center justify-center gap-6">
+            <h3 className="text-xl font-bold text-portfolio-700 mb-3">At a Glance</h3>
+            <div className="w-full flex flex-wrap justify-center gap-5">
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-3xl font-bold text-portfolio-700">30+</span>
+                <span className="text-sm text-portfolio-800">Projects</span>
               </div>
-              <div className="bg-background shadow-sm border border-border rounded-lg p-4 text-center">
-                <p className="text-3xl font-bold text-portfolio-600">30+</p>
-                <p className="text-sm text-muted-foreground">Projects Delivered</p>
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-3xl font-bold text-portfolio-700">8</span>
+                <span className="text-sm text-portfolio-800">Tech Stacks</span>
               </div>
-              <div className="bg-background shadow-sm border border-border rounded-lg p-4 text-center">
-                <p className="text-3xl font-bold text-portfolio-600">8</p>
-                <p className="text-sm text-muted-foreground">Tech Stacks</p>
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-3xl font-bold text-portfolio-700">95%</span>
+                <span className="text-sm text-portfolio-800">Client Sat.</span>
               </div>
-              <div className="bg-background shadow-sm border border-border rounded-lg p-4 text-center">
-                <p className="text-3xl font-bold text-portfolio-600">7+</p>
-                <p className="text-sm text-muted-foreground">Team Projects</p>
-              </div>
-            </div>
-            {/* Skills */}
-            <div>
-              <h4 className="text-lg font-semibold mb-3">Skills & Tools</h4>
-              <div className="flex flex-wrap gap-2">
-                {skills.map((skill) => (
-                  <Badge key={skill} variant="secondary" className="bg-portfolio-100 text-portfolio-800 hover:bg-portfolio-200">
-                    {skill}
-                  </Badge>
-                ))}
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-3xl font-bold text-portfolio-700">7+</span>
+                <span className="text-sm text-portfolio-800">Team Projects</span>
               </div>
             </div>
-          </div>
-        </div>
-        {/* What I Offer */}
-        <div className="mt-20">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold font-heading mb-4">Strengths for Your Team</h2>
-            <p className="text-muted-foreground">
-              My focus: reliable delivery, rapid learning, and supporting teammates to drive high-quality outcomes.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="bg-background p-6 rounded-xl border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:border-portfolio-300"
-              >
-                <div className="mb-4 p-3 bg-portfolio-50 inline-block rounded-lg">
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-muted-foreground">{service.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </div>
