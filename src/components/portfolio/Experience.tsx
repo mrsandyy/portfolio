@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Briefcase, GraduationCap } from "lucide-react";
@@ -9,11 +8,11 @@ const workExperience = [
     role: "Senior Frontend Developer",
     company: "Tech Innovations Inc.",
     duration: "2021 - Present",
-    description: "Lead the frontend development team in building responsive web applications. Implemented modern React practices, improved performance, and mentored junior developers.",
+    description: "Led cross-functional teams to deliver robust React applications for SaaS clients. Owned component design, best practices, and mentored new engineers.",
     achievements: [
-      "Reduced page load time by 40% through code splitting and lazy loading",
-      "Implemented a component library that increased development speed by 30%",
-      "Led the migration from class components to functional components with hooks"
+      "Reduced load times 40% via code splitting/lazy loading",
+      "Introduced developer onboarding guides for faster ramp-up",
+      "Facilitated bi-weekly code reviews and demo sessions"
     ]
   },
   {
@@ -21,11 +20,11 @@ const workExperience = [
     role: "Web Developer",
     company: "Digital Solutions Co.",
     duration: "2018 - 2021",
-    description: "Developed and maintained multiple client websites and web applications. Collaborated with designers to implement user interfaces and ensure responsive design.",
+    description: "Member of a remote scrum team building scalable client apps. Focused on collaborating with product/design for clean UX and reusable code.",
     achievements: [
-      "Built and deployed over 15 client websites with modern technologies",
-      "Integrated payment gateways and e-commerce functionality",
-      "Optimized database queries resulting in 50% faster data retrieval"
+      "Launched 15+ web apps, maintained above 95% satisfaction",
+      "Improved team delivery via automated testing (Jest)",
+      "Mentored 2 junior devs into full-time engineers"
     ]
   },
   {
@@ -33,11 +32,11 @@ const workExperience = [
     role: "Junior Developer",
     company: "StartUp Labs",
     duration: "2016 - 2018",
-    description: "Assisted in the development of web applications and participated in the full software development lifecycle.",
+    description: "Assisted with bug fixes and delivered features for MVP launches. Learned best practices from senior teammates and contributed actively in sprints.",
     achievements: [
-      "Contributed to the development of the company's flagship product",
-      "Created reusable UI components for the internal design system",
-      "Participated in code reviews and implemented feedback"
+      "Built reusable UI library components for new products",
+      "Documented and improved internal dev wiki",
+      "Consistently delivered sprint stories on time"
     ]
   }
 ];
@@ -48,14 +47,14 @@ const education = [
     degree: "Master of Computer Science",
     institution: "University of Technology",
     duration: "2014 - 2016",
-    description: "Specialized in web technologies and software engineering. Graduated with honors."
+    description: "Specialized in web technologies, group projects, and agile methodologies. Graduated with honors."
   },
   {
     id: 2,
-    degree: "Bachelor of Science in Computer Science",
+    degree: "BSc Computer Science",
     institution: "State University",
     duration: "2010 - 2014",
-    description: "Focused on programming fundamentals and software development. Participated in multiple hackathons and coding competitions."
+    description: "Learned fundamentals, contributed to hackathons and team software competitions."
   }
 ];
 
@@ -64,16 +63,14 @@ export function Experience() {
     <section id="experience" className="py-20">
       <div className="container">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-sm uppercase tracking-wider text-portfolio-600 font-medium mb-2">My Journey</h2>
+          <h2 className="text-sm uppercase tracking-wider text-portfolio-600 font-medium mb-2">Career Path</h2>
           <h3 className="text-3xl font-bold font-heading mb-4">
-            Work Experience & Education
+            Professional Experience & Education
           </h3>
           <p className="text-muted-foreground">
-            My professional journey combines industry experience with academic excellence, 
-            equipping me with a well-rounded skill set to tackle complex challenges.
+            My background shows growth from supporting roles to senior leadership in engineering teams, always aiming to deliver and collaborate.
           </p>
         </div>
-
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Work Experience */}
           <div>
@@ -83,10 +80,9 @@ export function Experience() {
               </div>
               <h3 className="text-2xl font-bold font-heading">Work Experience</h3>
             </div>
-
             <div className="relative pl-8 border-l-2 border-muted">
               {workExperience.map((job, index) => (
-                <div 
+                <div
                   key={job.id}
                   className={cn(
                     "relative mb-12 last:mb-0 transition-all duration-500 hover:-translate-y-1",
@@ -95,7 +91,6 @@ export function Experience() {
                 >
                   {/* Timeline dot */}
                   <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-portfolio-600 border-4 border-background"></div>
-                  
                   <Card className="relative hover:border-portfolio-300 transition-colors duration-300">
                     <CardContent className="p-6">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-1">
@@ -106,11 +101,10 @@ export function Experience() {
                       </div>
                       <h5 className="text-portfolio-600 font-medium mb-3">{job.company}</h5>
                       <p className="text-muted-foreground mb-4">{job.description}</p>
-                      
                       {/* Key achievements */}
                       {job.achievements && (
                         <div className="mt-3">
-                          <h6 className="text-sm font-semibold mb-2">Key Achievements:</h6>
+                          <h6 className="text-sm font-semibold mb-2">Team Impact & Achievements:</h6>
                           <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
                             {job.achievements.map((achievement, idx) => (
                               <li key={idx}>{achievement}</li>
@@ -124,7 +118,6 @@ export function Experience() {
               ))}
             </div>
           </div>
-
           {/* Education */}
           <div>
             <div className="flex items-center gap-3 mb-8">
@@ -133,10 +126,9 @@ export function Experience() {
               </div>
               <h3 className="text-2xl font-bold font-heading">Education</h3>
             </div>
-
             <div className="relative pl-8 border-l-2 border-muted">
               {education.map((edu, index) => (
-                <div 
+                <div
                   key={edu.id}
                   className={cn(
                     "relative mb-12 last:mb-0 transition-all duration-500 hover:-translate-y-1",
@@ -145,7 +137,6 @@ export function Experience() {
                 >
                   {/* Timeline dot */}
                   <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-portfolio-600 border-4 border-background"></div>
-                  
                   <Card className="relative hover:border-portfolio-300 transition-colors duration-300">
                     <CardContent className="p-6">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-1">

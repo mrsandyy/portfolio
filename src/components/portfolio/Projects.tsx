@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -63,26 +62,27 @@ const categories = ["All", "React", "Node.js", "TypeScript", "MongoDB"];
 export function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [visibleProjects, setVisibleProjects] = useState(3);
-  
+
   // Filter projects based on active category
-  const filteredProjects = activeCategory === "All"
-    ? projects
-    : projects.filter(project => project.tags.includes(activeCategory));
+  const filteredProjects =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((project) => project.tags.includes(activeCategory));
 
   return (
     <section id="projects" className="py-20 bg-muted/30">
       <div className="container">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-sm uppercase tracking-wider text-portfolio-600 font-medium mb-2">My Work</h2>
+          <h2 className="text-sm uppercase tracking-wider text-portfolio-600 font-medium mb-2">
+            Case Studies
+          </h2>
           <h3 className="text-3xl font-bold font-heading mb-4">
-            Featured Projects
+            Impactful Projects & Team Roles
           </h3>
           <p className="text-muted-foreground">
-            Check out some of my latest projects. Each project is built with a focus on performance, 
-            accessibility, and user experience.
+            These select projects demonstrate how I contributed as a developer, teammate, and technical problem solver. See my GitHub for more!
           </p>
         </div>
-        
         {/* Project Categories */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           {categories.map((category) => (
@@ -90,7 +90,9 @@ export function Projects() {
               key={category}
               variant={activeCategory === category ? "default" : "outline"}
               className={cn(
-                activeCategory === category ? "bg-portfolio-600 hover:bg-portfolio-700" : "hover:bg-portfolio-100",
+                activeCategory === category
+                  ? "bg-portfolio-600 hover:bg-portfolio-700"
+                  : "hover:bg-portfolio-100",
                 "transition-all duration-300"
               )}
               onClick={() => setActiveCategory(category)}
@@ -99,52 +101,50 @@ export function Projects() {
             </Button>
           ))}
         </div>
-        
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.slice(0, visibleProjects).map((project) => (
-            <div 
-              key={project.id} 
+            <div
+              key={project.id}
               className="group bg-background rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:border-portfolio-300 flex flex-col h-full"
             >
-              {/* Project Image */}
               <div className="h-48 overflow-hidden">
-                <img 
-                  src={project.image} 
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              
-              {/* Project Content */}
               <div className="p-6 flex flex-col flex-1">
-                {/* Tags */}
+                {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-3">
                   {project.tags.map((tag, idx) => (
-                    <span 
-                      key={idx} 
+                    <span
+                      key={idx}
                       className="px-2 py-1 bg-muted text-xs font-medium rounded-full"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                
                 <h4 className="text-xl font-semibold mb-2 group-hover:text-portfolio-600 transition-colors">
                   {project.title}
                 </h4>
-                
+                <p className="text-muted-foreground mb-2 text-sm">
+                  <span className="font-bold">My Role: </span>
+                  {project.featured
+                    ? "Lead Developer, Code Reviewer, Mentor"
+                    : "Contributor, Full Stack Developer"}
+                </p>
                 <p className="text-muted-foreground mb-4 flex-1">{project.description}</p>
-                
-                {/* Project Links */}
                 <div className="flex gap-3 mt-auto pt-4">
-                  <a 
+                  <a
                     href={project.demoLink}
                     className="flex items-center gap-1 text-sm font-medium text-portfolio-600 hover:text-portfolio-700 transition-colors"
                   >
                     <ExternalLink className="h-4 w-4" /> Demo
                   </a>
-                  <a 
+                  <a
                     href={project.repoLink}
                     className="flex items-center gap-1 text-sm font-medium text-portfolio-600 hover:text-portfolio-700 transition-colors"
                   >
@@ -155,12 +155,10 @@ export function Projects() {
             </div>
           ))}
         </div>
-        
-        {/* Load More Button */}
         {filteredProjects.length > visibleProjects && (
           <div className="mt-10 text-center">
-            <Button 
-              onClick={() => setVisibleProjects(prev => prev + 3)}
+            <Button
+              onClick={() => setVisibleProjects((prev) => prev + 3)}
               variant="outline"
               className="border-portfolio-600 text-portfolio-600 hover:bg-portfolio-50"
             >
