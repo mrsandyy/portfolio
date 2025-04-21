@@ -98,4 +98,45 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Smooth scrolling for the entire site */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom hover effect for project cards */
+  .project-card {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .project-card:hover {
+    @apply transform -translate-y-2 shadow-lg;
+  }
+  
+  /* Section transitions */
+  .section-transition {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+  
+  .section-transition.visible {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  /* Text gradient effect */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-portfolio-600 to-portfolio-400;
+  }
+  
+  /* Image hover effects */
+  .image-zoom {
+    @apply overflow-hidden;
+  }
+  
+  .image-zoom img {
+    @apply transition-transform duration-700 ease-out;
+  }
+  
+  .image-zoom:hover img {
+    @apply transform scale-110;
+  }
 }
