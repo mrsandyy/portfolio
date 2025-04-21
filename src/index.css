@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -138,5 +139,120 @@
   
   .image-zoom:hover img {
     @apply transform scale-110;
+  }
+
+  /* New animations */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(20px, -20px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 4s ease-in-out infinite;
+  }
+  
+  .animate-spin-slow {
+    animation: spin-slow 12s linear infinite;
+  }
+  
+  .animate-blob {
+    animation: blob 10s infinite alternate;
+  }
+  
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  
+  /* Cursor follower */
+  .cursor-follower {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background: rgba(107, 132, 243, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+  }
+  
+  a:hover ~ .cursor-follower,
+  button:hover ~ .cursor-follower {
+    width: 50px;
+    height: 50px;
+    background: rgba(107, 132, 243, 0.4);
+  }
+  
+  /* Code scrollbar styling */
+  pre {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(107, 132, 243, 0.5) rgba(0, 0, 0, 0.1);
+  }
+  
+  pre::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  pre::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  pre::-webkit-scrollbar-thumb {
+    background-color: rgba(107, 132, 243, 0.5);
+    border-radius: 10px;
   }
 }

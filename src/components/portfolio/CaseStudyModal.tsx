@@ -1,6 +1,8 @@
 
 import { Dialog, DialogContent, DialogTitle, DialogHeader, DialogDescription } from "@/components/ui/dialog";
-import { Github, ExternalLink, Database, Server, Cpu } from "lucide-react";
+import { Github, ExternalLink, Database, Server, Cpu, Code, Terminal, CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 interface CaseStudyModalProps {
   open: boolean;
@@ -25,65 +27,141 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
   if (!project) return null;
   const { title, description, image, tags, demoLink, repoLink, caseStudy } = project;
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const stagger = {
+    visible: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-xl md:max-w-2xl p-0 overflow-hidden">
-        <div className="flex flex-col md:flex-row">
-          <div className="flex-1 min-w-[250px] p-6 bg-portfolio-100 flex flex-col justify-center">
-            <img src={image} alt={title} className="w-full h-40 object-cover rounded-lg mb-4" />
-            <div className="flex flex-wrap gap-2 mb-2">
-              {tags.map((tag, i) => (
-                <span
-                  key={i}
-                  className="bg-portfolio-300 text-portfolio-800 text-xs px-2 py-1 rounded-full font-medium"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <div className="flex gap-4 mt-2">
-              <a href={demoLink} target="_blank" className="flex gap-1 items-center text-portfolio-700 hover:text-portfolio-900 font-semibold text-sm">
-                <ExternalLink className="h-4 w-4" /> Demo
-              </a>
-              <a href={repoLink} target="_blank" className="flex gap-1 items-center text-portfolio-700 hover:text-portfolio-900 font-semibold text-sm">
-                <Github className="h-4 w-4" /> Code
-              </a>
-            </div>
-          </div>
-          <div className="flex-[2] px-7 pt-8 pb-7">
-            <DialogHeader>
-              <DialogTitle className="text-2xl font-bold mb-2">{title}</DialogTitle>
-              <DialogDescription className="mb-3 text-portfolio-800">{caseStudy.headline}</DialogDescription>
-            </DialogHeader>
-            <div className="mb-4">
-              <p className="mb-2 font-medium text-portfolio-800">{description}</p>
-              <div className="mb-2">
-                <span className="inline-block font-bold text-portfolio-700 mb-1">Main Stack:</span>
-                <div className="flex flex-wrap gap-2">
-                  {caseStudy.mainStack.map(stack => (
-                    <span key={stack} className="flex items-center gap-1 bg-portfolio-200 px-2 py-1 rounded text-xs text-portfolio-900 font-semibold">
-                      {stack === "Node.js" && <Server className="h-4 w-4" />}
-                      {stack === "TypeScript" && <Cpu className="h-4 w-4" />}
-                      {stack === "PostgreSQL" && <Database className="h-4 w-4" />}
-                      {stack}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="mb-2">
-              <span className="font-bold text-portfolio-700 block mb-1">Challenges:</span>
-              <div className="text-sm text-portfolio-800 mb-2">{caseStudy.challenges}</div>
-            </div>
-            <div>
-              <span className="font-bold text-portfolio-700 block mb-1">Back-End Highlights:</span>
-              <ul className="list-disc pl-5 space-y-1 text-sm text-portfolio-800">
-                {caseStudy.backendHighlights.map((point, i) => (
-                  <li key={i}>{point}</li>
+      <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-xl bg-gradient-to-br from-portfolio-50 via-white to-portfolio-50">
+        <div className="grid md:grid-cols-5 gap-0">
+          {/* Left sidebar with project info */}
+          <motion.div 
+            className="md:col-span-2 p-6 bg-portfolio-800 text-white flex flex-col"
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
+          >
+            <motion.div variants={fadeInUp} className="mb-4">
+              <img src={image} alt={title} className="w-full h-40 object-cover rounded-lg mb-4 border-2 border-portfolio-600 shadow-lg" />
+            </motion.div>
+            
+            <motion.h3 variants={fadeInUp} className="text-xl font-bold mb-2 text-portfolio-100">{title}</motion.h3>
+            <motion.p variants={fadeInUp} className="text-sm text-portfolio-200 mb-4">{description}</p>
+            
+            <motion.div variants={fadeInUp} className="mb-4">
+              <h4 className="text-sm font-semibold mb-2 text-portfolio-300">Tech Stack</h4>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {caseStudy.mainStack.map(stack => (
+                  <span 
+                    key={stack} 
+                    className="flex items-center gap-1 bg-portfolio-700/80 px-2.5 py-1 rounded-full text-xs text-white font-medium border border-portfolio-600 hover:bg-portfolio-600 transition-colors"
+                  >
+                    {stack === "Node.js" && <Server className="h-3 w-3" />}
+                    {stack === "TypeScript" && <Terminal className="h-3 w-3" />}
+                    {stack === "PostgreSQL" && <Database className="h-3 w-3" />}
+                    {stack === "GraphQL" && <Code className="h-3 w-3" />}
+                    {stack === "WebSockets" && <Code className="h-3 w-3" />}
+                    {stack === "Redis" && <Database className="h-3 w-3" />}
+                    {stack === "Docker" && <Server className="h-3 w-3" />}
+                    {stack === "Stripe" && <Code className="h-3 w-3" />}
+                    {stack}
+                  </span>
                 ))}
-              </ul>
+              </div>
+            </motion.div>
+            
+            <motion.div variants={fadeInUp} className="flex gap-3 mt-auto pt-4">
+              <a href={demoLink} target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" size="sm" className="bg-portfolio-700 text-white border-portfolio-600 hover:bg-portfolio-600 transition-all">
+                  <ExternalLink className="h-4 w-4 mr-1" /> Live Demo
+                </Button>
+              </a>
+              <a href={repoLink} target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" size="sm" className="bg-transparent text-white border-portfolio-300 hover:bg-portfolio-700/50 transition-all">
+                  <Github className="h-4 w-4 mr-1" /> View Code
+                </Button>
+              </a>
+            </motion.div>
+          </motion.div>
+          
+          {/* Right content with details */}
+          <motion.div 
+            className="md:col-span-3 px-7 py-8"
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
+          >
+            <DialogHeader className="mb-6">
+              <motion.div variants={fadeInUp}>
+                <div className="flex items-center justify-between mb-2">
+                  <DialogTitle className="text-2xl font-bold text-portfolio-800">{title}</DialogTitle>
+                  <span className="text-xs font-medium bg-portfolio-100 text-portfolio-700 px-2 py-1 rounded-full">Back-End Project</span>
+                </div>
+                <DialogDescription className="text-lg font-medium text-portfolio-700">
+                  {caseStudy.headline}
+                </DialogDescription>
+              </motion.div>
+            </DialogHeader>
+            
+            <div className="space-y-6">
+              <motion.div variants={fadeInUp} className="bg-portfolio-50 p-4 rounded-lg border-l-4 border-portfolio-600">
+                <h3 className="font-bold text-portfolio-800 mb-2 flex items-center">
+                  <Code className="h-5 w-5 mr-2 text-portfolio-600" /> Technical Challenge
+                </h3>
+                <p className="text-portfolio-700 text-sm">{caseStudy.challenges}</p>
+              </motion.div>
+              
+              <motion.div variants={fadeInUp}>
+                <h3 className="font-bold text-portfolio-800 mb-3 flex items-center">
+                  <Server className="h-5 w-5 mr-2 text-portfolio-600" /> Back-End Architecture Highlights
+                </h3>
+                <motion.ul 
+                  className="space-y-3 pl-2"
+                  variants={stagger}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {caseStudy.backendHighlights.map((point, i) => (
+                    <motion.li 
+                      key={i} 
+                      className="flex gap-3 text-portfolio-700"
+                      variants={fadeInUp}
+                    >
+                      <CheckCircle className="h-5 w-5 text-portfolio-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm">{point}</span>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </motion.div>
+              
+              <motion.div variants={fadeInUp} className="pt-2 mt-4">
+                <div className="flex justify-between items-center">
+                  <h3 className="font-bold text-portfolio-800">Key Achievements</h3>
+                  <span className="text-xs bg-portfolio-200 text-portfolio-700 px-2 py-1 rounded-full">Lead Developer Role</span>
+                </div>
+                <div className="grid grid-cols-2 gap-4 mt-3">
+                  <div className="bg-white p-3 rounded-lg border border-portfolio-200 shadow-sm">
+                    <h4 className="text-xs font-semibold text-portfolio-600">Performance</h4>
+                    <p className="text-sm font-bold text-portfolio-800">50% Faster API Response</p>
+                  </div>
+                  <div className="bg-white p-3 rounded-lg border border-portfolio-200 shadow-sm">
+                    <h4 className="text-xs font-semibold text-portfolio-600">Scale</h4>
+                    <p className="text-sm font-bold text-portfolio-800">10K+ Concurrent Users</p>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </DialogContent>
     </Dialog>
