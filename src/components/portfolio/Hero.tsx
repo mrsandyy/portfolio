@@ -28,10 +28,10 @@ export function Hero() {
               transition={{ duration: 0.6 }}
               className="mb-3 flex items-center gap-3"
             >
-              <span className="block px-3 py-1 rounded-lg font-bold text-white bg-portfolio-700 shadow text-sm tracking-wide">
+              <span className="block px-3 py-1 rounded-lg font-bold text-white bg-portfolio-700 shadow-md text-sm tracking-wide">
                 Back-End Engineer
               </span>
-              <span className="block px-3 py-1 rounded-lg bg-portfolio-200 text-portfolio-700 font-semibold">
+              <span className="block px-3 py-1 rounded-lg bg-portfolio-200 text-portfolio-700 font-semibold shadow-sm">
                 Available Now
               </span>
             </motion.div>
@@ -86,8 +86,8 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Highlights at the bottom for mobile, same position for desktop */}
-        <div className="mt-12 md:mt-16">
+        {/* Highlights at the bottom for both mobile and desktop */}
+        <div className="mt-16 md:mt-20">
           <HeroHighlights />
         </div>
       </div>

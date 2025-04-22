@@ -16,15 +16,16 @@ const Index = () => {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
     
+    // Create and add custom cursor
     const cursor = document.createElement("div");
     cursor.classList.add("cursor-follower");
     document.body.appendChild(cursor);
 
     const handleMouseMove = (e: MouseEvent) => {
+      // Use requestAnimationFrame for smoother cursor movement
       requestAnimationFrame(() => {
-        if (cursor) {
-          cursor.style.transform = `translate3d(${e.clientX - 5}px, ${e.clientY - 5}px, 0)`;
-        }
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
       });
     };
 
