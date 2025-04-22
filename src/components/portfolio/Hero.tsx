@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Linkedin, Github, FileText, Database, Server, Cpu, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -42,7 +41,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Expert
+            Sandeep Vishnoi
             <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent block md:ml-3 md:inline-block">
               Backend Engineering
             </span>
@@ -153,53 +152,51 @@ export function Hero() {
           </motion.div>
         </div>
         
-        {/* Right content - Stats & Visual */}
-        <div className="flex-1 flex flex-col items-center">
+        {/* Right content - Code & Image */}
+        <div className="flex-1 flex flex-col items-center gap-8">
           <motion.div 
-            className="relative mb-10 md:mb-0 w-full"
+            className="relative w-full max-w-lg"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {/* Modern code visual instead of simple image */}
-            <div className="hidden md:block relative rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-portfolio-800 to-portfolio-600 p-0.5">
+            {/* Profile Image */}
+            <motion.div
+              className="absolute -top-4 -right-4 w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b" 
+                alt="Sandeep Vishnoi"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+            
+            {/* Code Block */}
+            <div className="w-full rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-portfolio-800 to-portfolio-600 p-0.5">
               <div className="bg-portfolio-900/90 rounded-xl p-6 backdrop-blur">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="w-3 h-3 bg-red-500 rounded-full"></span>
                   <span className="w-3 h-3 bg-yellow-400 rounded-full"></span>
                   <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-                  <span className="ml-2 text-xs text-portfolio-300 font-mono">server.js</span>
+                  <span className="ml-2 text-xs text-portfolio-300 font-mono">server.ts</span>
                 </div>
                 
-                <pre className="text-sm font-mono">
+                <pre className="text-sm font-mono overflow-x-auto">
                   <code className="text-portfolio-200">
-                    <span className="text-blue-300">const</span> <span className="text-green-300">express</span> = <span className="text-yellow-300">require</span>(<span className="text-orange-300">'express'</span>);{'\n'}
-                    <span className="text-blue-300">const</span> <span className="text-green-300">app</span> = <span className="text-green-300">express</span>();{'\n'}
-                    {'\n'}
-                    <span className="text-green-400">// Authentication middleware</span>{'\n'}
-                    <span className="text-blue-300">const</span> <span className="text-green-300">authenticate</span> = <span className="text-purple-300">(req, res, next)</span> {'=>'} {'{'}{'{'}{'\n'}
-                    {'  '}<span className="text-purple-300">try</span> {'{{'}{'\n'}
-                    {'    '}<span className="text-blue-300">const</span> <span className="text-green-300">token</span> = <span className="text-green-300">req</span>.<span className="text-green-300">headers</span>.<span className="text-green-300">authorization</span>;{'\n'}
-                    {'    '}<span className="text-yellow-300">if</span> (!<span className="text-green-300">token</span>) <span className="text-yellow-300">return</span> <span className="text-green-300">res</span>.<span className="text-green-300">status</span>(<span className="text-orange-300">401</span>).<span className="text-green-300">json</span>({'{'} <span className="text-orange-300">error</span>: <span className="text-orange-300">'Unauthorized'</span> {'}'});{'\n'}
-                    {'    '}<span className="text-green-300">next</span>();{'\n'}
-                    {'  '}{'}}'}{'}'} <span className="text-purple-300">catch</span> (<span className="text-green-300">error</span>) {'{{'}{'\n'}
-                    {'    '}<span className="text-green-300">res</span>.<span className="text-green-300">status</span>(<span className="text-orange-300">500</span>).<span className="text-green-300">json</span>({'{'} <span className="text-orange-300">error</span>: <span className="text-green-300">error</span>.<span className="text-green-300">message</span> {'}'});{'\n'}
-                    {'  '}{'}}'}{'\n'}
-                    {'}};'}{'\n'}
-                    {'\n'}
-                    <span className="text-green-400">// API endpoints</span>{'\n'}
-                    <span className="text-green-300">app</span>.<span className="text-yellow-300">get</span>(<span className="text-orange-300">'/api/data'</span>, <span className="text-green-300">authenticate</span>, <span className="text-purple-300">async</span> (<span className="text-green-300">req</span>, <span className="text-green-300">res</span>) {'=>'} {'{{'}{'\n'}
-                    {'  '}<span className="text-purple-300">try</span> {'{{'}{'\n'}
-                    {'    '}<span className="text-blue-300">const</span> <span className="text-green-300">result</span> = <span className="text-purple-300">await</span> <span className="text-green-300">db</span>.<span className="text-yellow-300">query</span>(<span className="text-orange-300">'SELECT * FROM items'</span>);{'\n'}
-                    {'    '}<span className="text-green-300">res</span>.<span className="text-green-300">json</span>(<span className="text-green-300">result</span>);{'\n'}
-                    {'  '}{'}}'}{'}'} <span className="text-purple-300">catch</span> (<span className="text-green-300">error</span>) {'{{'}{'\n'}
-                    {'    '}<span className="text-green-300">res</span>.<span className="text-green-300">status</span>(<span className="text-orange-300">500</span>).<span className="text-green-300">json</span>({'{'} <span className="text-orange-300">error</span>: <span className="text-green-300">error</span>.<span className="text-green-300">message</span> {'}'});{'\n'}
-                    {'  '}{'}}'}{'\n'}
-                    {'}});'}{'\n'}
-                    {'\n'}
-                    <span className="text-green-300">app</span>.<span className="text-yellow-300">listen</span>(<span className="text-orange-300">3000</span>, () {'=>'} {'{{'}{'\n'}
-                    {'  '}<span className="text-green-300">console</span>.<span className="text-yellow-300">log</span>(<span className="text-orange-300">'Server running on port 3000'</span>);{'\n'}
-                    {'}});'}{'\n'}
+                    <span className="text-blue-300">import</span> <span className="text-orange-300">{`{ Router }`}</span> <span className="text-blue-300">from</span> <span className="text-orange-300">'express'</span>;{'\n'}
+                    <span className="text-blue-300">import</span> <span className="text-orange-300">{`{ authenticate }`}</span> <span className="text-blue-300">from</span> <span className="text-orange-300">'./middleware'</span>;{'\n\n'}
+                    <span className="text-blue-300">const</span> <span className="text-green-300">router</span> = <span className="text-yellow-300">Router</span>();{'\n\n'}
+                    <span className="text-green-300">router</span>.<span className="text-yellow-300">get</span>(<span className="text-orange-300">'/api/data'</span>, <span className="text-green-300">authenticate</span>, <span className="text-purple-300">async</span> (<span className="text-green-300">req</span>, <span className="text-green-300">res</span>) => {'{'}
+                    {'\n  '}<span className="text-purple-300">try</span> {'{'}
+                    {'\n    '}<span className="text-blue-300">const</span> <span className="text-green-300">data</span> = <span className="text-purple-300">await</span> <span className="text-green-300">prisma</span>.<span className="text-green-300">user</span>.<span className="text-yellow-300">findMany</span>();
+                    {'\n    '}<span className="text-green-300">res</span>.<span className="text-yellow-300">json</span>({'{'} <span className="text-orange-300">data</span> {'}'});
+                    {'\n  }'} <span className="text-purple-300">catch</span> (<span className="text-green-300">error</span>) {'{'}
+                    {'\n    '}<span className="text-green-300">res</span>.<span className="text-yellow-300">status</span>(<span className="text-orange-300">500</span>).<span className="text-yellow-300">json</span>({'{'} <span className="text-orange-300">error</span> {'}'});
+                    {'\n  }'}
+                    {'\n}'});{'\n'}
                   </code>
                 </pre>
               </div>
