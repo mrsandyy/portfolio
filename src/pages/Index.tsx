@@ -1,5 +1,4 @@
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollRevealWrapper } from "@/components/portfolio/ScrollRevealWrapper";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { Navbar } from "@/components/portfolio/Navbar";
@@ -13,6 +12,30 @@ import { Loader } from "@/components/portfolio/Loader";
 import { motion } from "framer-motion";
 
 const Index = () => {
+  const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
+  
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Use requestAnimationFrame for smooth animation
+      requestAnimationFrame(() => {
+        const x = e.clientX - 15;
+        const y = e.clientY - 15;
+        
+        // Update cursor position with transform for better performance
+        const cursor = document.querySelector('.cursor-follower') as HTMLElement;
+        if (cursor) {
+          cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        }
+      });
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
   // Use the smooth scroll hook
   useSmoothScroll();
   
@@ -50,6 +73,9 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
+      {/* Custom cursor */}
+      <div className="cursor-follower" />
+      
       <Loader />
       <Navbar />
       <Hero />
