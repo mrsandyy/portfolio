@@ -21,19 +21,37 @@ const Index = () => {
     cursor.classList.add("cursor-follower");
     document.body.appendChild(cursor);
 
+    let currentX = 0;
+    let currentY = 0;
+    let raf: number;
+
+    const lerp = (start: number, end: number, factor: number) => {
+      return start + (end - start) * factor;
+    };
+
+    const updateCursor = () => {
+      currentX = lerp(currentX, mouseX, 0.15);
+      currentY = lerp(currentY, mouseY, 0.15);
+      cursor.style.left = `${currentX}px`;
+      cursor.style.top = `${currentY}px`;
+      raf = requestAnimationFrame(updateCursor);
+    };
+
+    let mouseX = 0;
+    let mouseY = 0;
+
     const handleMouseMove = (e: MouseEvent) => {
-      // Use requestAnimationFrame for smoother cursor movement
-      requestAnimationFrame(() => {
-        cursor.style.left = `${e.clientX}px`;
-        cursor.style.top = `${e.clientY}px`;
-      });
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     };
 
     document.addEventListener("mousemove", handleMouseMove);
+    raf = requestAnimationFrame(updateCursor);
     
     return () => {
       document.documentElement.style.scrollBehavior = "";
       document.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(raf);
       if (document.body.contains(cursor)) {
         document.body.removeChild(cursor);
       }
