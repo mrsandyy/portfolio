@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { ScrollRevealWrapper } from "@/components/portfolio/ScrollRevealWrapper";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { Navbar } from "@/components/portfolio/Navbar";

@@ -1,4 +1,5 @@
 
+import React from "react";
 import { Dialog, DialogContent, DialogTitle, DialogHeader, DialogDescription } from "@/components/ui/dialog";
 import { Github, ExternalLink, Database, Server, Cpu, Code, Terminal, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -56,7 +57,7 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
             </motion.div>
             
             <motion.h3 variants={fadeInUp} className="text-xl font-bold mb-2 text-portfolio-100">{title}</motion.h3>
-            <motion.p variants={fadeInUp} className="text-sm text-portfolio-200 mb-4">{description}</p>
+            <motion.p variants={fadeInUp} className="text-sm text-portfolio-200 mb-4">{description}</motion.p>
             
             <motion.div variants={fadeInUp} className="mb-4">
               <h4 className="text-sm font-semibold mb-2 text-portfolio-300">Tech Stack</h4>

@@ -1,4 +1,5 @@
 
+import React from "react";
 import { Linkedin, Github, FileText, Database, Server, Cpu, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -130,8 +131,6 @@ export function Hero() {
                   });
                 }
               }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               See Case Studies
             </Button>
@@ -178,29 +177,29 @@ export function Hero() {
                     <span className="text-blue-300">const</span> <span className="text-green-300">app</span> = <span className="text-green-300">express</span>();{'\n'}
                     {'\n'}
                     <span className="text-green-400">// Authentication middleware</span>{'\n'}
-                    <span className="text-blue-300">const</span> <span className="text-green-300">authenticate</span> = <span className="text-purple-300">(req, res, next)</span> => {'{'}{'\n'}
-                    {'  '}<span className="text-purple-300">try</span> {'{'}{'\n'}
+                    <span className="text-blue-300">const</span> <span className="text-green-300">authenticate</span> = <span className="text-purple-300">(req, res, next)</span> {'=>'} {'{'}{'{'}{'\n'}
+                    {'  '}<span className="text-purple-300">try</span> {'{{'}{'\n'}
                     {'    '}<span className="text-blue-300">const</span> <span className="text-green-300">token</span> = <span className="text-green-300">req</span>.<span className="text-green-300">headers</span>.<span className="text-green-300">authorization</span>;{'\n'}
                     {'    '}<span className="text-yellow-300">if</span> (!<span className="text-green-300">token</span>) <span className="text-yellow-300">return</span> <span className="text-green-300">res</span>.<span className="text-green-300">status</span>(<span className="text-orange-300">401</span>).<span className="text-green-300">json</span>({'{'} <span className="text-orange-300">error</span>: <span className="text-orange-300">'Unauthorized'</span> {'}'});{'\n'}
                     {'    '}<span className="text-green-300">next</span>();{'\n'}
-                    {'  '}</span>} <span className="text-purple-300">catch</span> (<span className="text-green-300">error</span>) {'{'}{'\n'}
+                    {'  '}{'}}'}{'}'} <span className="text-purple-300">catch</span> (<span className="text-green-300">error</span>) {'{{'}{'\n'}
                     {'    '}<span className="text-green-300">res</span>.<span className="text-green-300">status</span>(<span className="text-orange-300">500</span>).<span className="text-green-300">json</span>({'{'} <span className="text-orange-300">error</span>: <span className="text-green-300">error</span>.<span className="text-green-300">message</span> {'}'});{'\n'}
-                    {'  '}{'}'}{'\n'}
-                    {'}'};{'\n'}
+                    {'  '}{'}}'}{'\n'}
+                    {'}};'}{'\n'}
                     {'\n'}
                     <span className="text-green-400">// API endpoints</span>{'\n'}
-                    <span className="text-green-300">app</span>.<span className="text-yellow-300">get</span>(<span className="text-orange-300">'/api/data'</span>, <span className="text-green-300">authenticate</span>, <span className="text-purple-300">async</span> (<span className="text-green-300">req</span>, <span className="text-green-300">res</span>) => {'{'}{'\n'}
-                    {'  '}<span className="text-purple-300">try</span> {'{'}{'\n'}
+                    <span className="text-green-300">app</span>.<span className="text-yellow-300">get</span>(<span className="text-orange-300">'/api/data'</span>, <span className="text-green-300">authenticate</span>, <span className="text-purple-300">async</span> (<span className="text-green-300">req</span>, <span className="text-green-300">res</span>) {'=>'} {'{{'}{'\n'}
+                    {'  '}<span className="text-purple-300">try</span> {'{{'}{'\n'}
                     {'    '}<span className="text-blue-300">const</span> <span className="text-green-300">result</span> = <span className="text-purple-300">await</span> <span className="text-green-300">db</span>.<span className="text-yellow-300">query</span>(<span className="text-orange-300">'SELECT * FROM items'</span>);{'\n'}
                     {'    '}<span className="text-green-300">res</span>.<span className="text-green-300">json</span>(<span className="text-green-300">result</span>);{'\n'}
-                    {'  '}</span>} <span className="text-purple-300">catch</span> (<span className="text-green-300">error</span>) {'{'}{'\n'}
+                    {'  '}{'}}'}{'}'} <span className="text-purple-300">catch</span> (<span className="text-green-300">error</span>) {'{{'}{'\n'}
                     {'    '}<span className="text-green-300">res</span>.<span className="text-green-300">status</span>(<span className="text-orange-300">500</span>).<span className="text-green-300">json</span>({'{'} <span className="text-orange-300">error</span>: <span className="text-green-300">error</span>.<span className="text-green-300">message</span> {'}'});{'\n'}
-                    {'  '}{'}'}{'\n'}
-                    {'}'});{'\n'}
+                    {'  '}{'}}'}{'\n'}
+                    {'}});'}{'\n'}
                     {'\n'}
-                    <span className="text-green-300">app</span>.<span className="text-yellow-300">listen</span>(<span className="text-orange-300">3000</span>, () => {'{'}{'\n'}
+                    <span className="text-green-300">app</span>.<span className="text-yellow-300">listen</span>(<span className="text-orange-300">3000</span>, () {'=>'} {'{{'}{'\n'}
                     {'  '}<span className="text-green-300">console</span>.<span className="text-yellow-300">log</span>(<span className="text-orange-300">'Server running on port 3000'</span>);{'\n'}
-                    {'}'});{'\n'}
+                    {'}});'}{'\n'}
                   </code>
                 </pre>
               </div>
