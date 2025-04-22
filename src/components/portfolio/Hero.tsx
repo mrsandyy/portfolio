@@ -1,7 +1,10 @@
+
 import React from "react";
-import { Linkedin, Github, FileText, Database, Server, Cpu, Terminal } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Database, Server, Cpu, Terminal } from "lucide-react";
+import { HeroImage } from "./hero/HeroImage";
+import { HeroActions } from "./hero/HeroActions";
+import { HeroHighlights } from "./hero/HeroHighlights";
 
 const coreSkills = [
   { label: "Node.js", icon: <Server className="h-5 w-5 text-portfolio-700" /> },
@@ -12,187 +15,80 @@ const coreSkills = [
   { label: "Cloud/Deploy", icon: <Server className="h-5 w-5 text-portfolio-700" /> },
 ];
 
-const highlights = [
-  { label: "Experience", value: "5+ yrs", desc: "Professional Engineering" },
-  { label: "Systems Built", value: "30+", desc: "Production Projects" },
-  { label: "Team Projects", value: "10+", desc: "Collaborative Dev" },
-  { label: "Stack", value: "Node, TS, SQL", desc: "Modern Technologies" },
-];
-
 export function Hero() {
   return (
     <section id="home" className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-portfolio-50 to-white relative overflow-hidden">
-      <div className="container flex flex-col-reverse md:flex-row gap-12 md:gap-6 items-center justify-between relative z-10">
-        {/* Left content */}
-        <div className="flex-1 flex flex-col items-center md:items-start max-w-xl">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-3 flex items-center gap-3"
-          >
-            <span className="block px-3 py-1 rounded-lg font-bold text-white bg-portfolio-700 shadow text-sm tracking-wide">Back-End Engineer</span>
-            <span className="block px-3 py-1 rounded-lg bg-portfolio-200 text-portfolio-700 font-semibold">Available Now</span>
-          </motion.div>
-          
-          <motion.h1 
-            className="font-bold text-4xl sm:text-5xl text-portfolio-800 mb-4 text-center md:text-left leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Sandeep Vishnoi
-            <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent block md:ml-3 md:inline-block">
-              Backend Engineer
-            </span>
-          </motion.h1>
-          
-          <motion.p
-            className="text-lg text-portfolio-600 mb-6 text-center md:text-left"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            Scaling systems and building resilient APIs that power modern applications
-          </motion.p>
-          
-          <motion.div 
-            className="flex gap-3 py-2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <a 
-              href="https://linkedin.com/in/johndoe" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-portfolio-100 hover:bg-portfolio-200 p-2 rounded-full transition-colors"
-              aria-label="View LinkedIn"
+      <div className="container relative z-10">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-6 items-center justify-between">
+          {/* Mobile: Image first, then content */}
+          <div className="flex flex-col items-center md:items-start flex-1 order-2 md:order-1">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-3 flex items-center gap-3"
             >
-              <Linkedin className="h-6 w-6 text-portfolio-700" />
-            </a>
-            <a 
-              href="https://github.com/johndoe" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-portfolio-100 hover:bg-portfolio-200 p-2 rounded-full transition-colors"
-              aria-label="View GitHub"
+              <span className="block px-3 py-1 rounded-lg font-bold text-white bg-portfolio-700 shadow text-sm tracking-wide">
+                Back-End Engineer
+              </span>
+              <span className="block px-3 py-1 rounded-lg bg-portfolio-200 text-portfolio-700 font-semibold">
+                Available Now
+              </span>
+            </motion.div>
+            
+            <motion.h1 
+              className="font-bold text-4xl sm:text-5xl text-portfolio-800 mb-4 text-center md:text-left leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <Github className="h-6 w-6 text-portfolio-700" />
-            </a>
-            <a 
-              href="/resume.pdf" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="group"
+              Sandeep Vishnoi
+              <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent block md:ml-3 md:inline-block">
+                Backend Engineer
+              </span>
+            </motion.h1>
+            
+            <motion.p
+              className="text-lg text-portfolio-600 mb-6 text-center md:text-left"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <Button size="sm" variant="outline" className="border-portfolio-600 text-portfolio-700 hover:bg-portfolio-50 font-semibold group-hover:shadow-md transition-all">
-                <FileText className="h-4 w-4 mr-2" /> Resume
-              </Button>
-            </a>
-          </motion.div>
+              Scaling systems and building resilient APIs that power modern applications
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-wrap gap-3 mt-5 mb-8 justify-center md:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5, staggerChildren: 0.1 }}
+            >
+              {coreSkills.map((skill, index) => (
+                <motion.span 
+                  key={skill.label} 
+                  className="flex items-center gap-2 bg-portfolio-200/80 text-portfolio-900 px-3 py-1 rounded-lg font-semibold shadow-sm text-sm hover:bg-portfolio-300 hover:-translate-y-1 border border-portfolio-100 transition-all"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {skill.icon} {skill.label}
+                </motion.span>
+              ))}
+            </motion.div>
+            
+            <HeroActions />
+          </div>
           
-          <motion.div 
-            className="flex flex-wrap gap-3 mt-5 mb-8 justify-center md:justify-start"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5, staggerChildren: 0.1 }}
-          >
-            {coreSkills.map((skill, index) => (
-              <motion.span 
-                key={skill.label} 
-                className="flex items-center gap-2 bg-portfolio-200/80 text-portfolio-900 px-3 py-1 rounded-lg font-semibold shadow-sm text-sm hover:bg-portfolio-300 hover:-translate-y-1 border border-portfolio-100 transition-all"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-              >
-                {skill.icon} {skill.label}
-              </motion.span>
-            ))}
-          </motion.div>
-          
-          <motion.div 
-            className="flex gap-4 pt-2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            <Button
-              size="lg"
-              className="bg-portfolio-700 hover:bg-portfolio-800 text-white font-semibold shadow-md hover:shadow-lg transition-all"
-              onClick={() => {
-                const el = document.querySelector("#projects");
-                if (el) {
-                  window.scrollTo({
-                    top: el.getBoundingClientRect().top + window.scrollY - 90,
-                    behavior: "smooth",
-                  });
-                }
-              }}
-            >
-              See Case Studies
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-portfolio-700 text-portfolio-700 hover:bg-portfolio-100 font-semibold hover:shadow-md transition-all"
-              onClick={() => {
-                const el = document.querySelector("#contact");
-                if (el) {
-                  window.scrollTo({
-                    top: el.getBoundingClientRect().top + window.scrollY - 90,
-                    behavior: "smooth",
-                  });
-                }
-              }}
-            >
-              Let's Connect
-            </Button>
-          </motion.div>
+          {/* Mobile: Image at the top */}
+          <div className="flex-1 flex flex-col items-center order-1 md:order-2">
+            <HeroImage />
+          </div>
         </div>
-        
-        {/* Right content - Profile Image & Stats */}
-        <div className="flex-1 flex flex-col items-center">
-          <motion.div 
-            className="relative mb-10 w-full max-w-md mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <div className="relative">
-              <div className="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  alt="Sandeep Vishnoi"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-portfolio-500/20 to-transparent"></div>
-            </div>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full"
-          >
-            {highlights.map((h, idx) => (
-              <motion.div 
-                key={h.label} 
-                className="flex flex-col items-center p-4 rounded-xl bg-white border-2 border-portfolio-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                whileHover={{ scale: 1.05 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.6 + idx * 0.1 }}
-              >
-                <span className="text-xs uppercase font-semibold text-portfolio-700 tracking-wide">{h.label}</span>
-                <span className="text-3xl font-bold text-portfolio-800 leading-tight">{h.value}</span>
-                <span className="text-xs text-portfolio-600 text-center">{h.desc}</span>
-              </motion.div>
-            ))}
-          </motion.div>
+
+        {/* Highlights at the bottom for mobile, same position for desktop */}
+        <div className="mt-12 md:mt-16">
+          <HeroHighlights />
         </div>
       </div>
       

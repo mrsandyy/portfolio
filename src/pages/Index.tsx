@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect } from "react";
 import { ScrollRevealWrapper } from "@/components/portfolio/ScrollRevealWrapper";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { Navbar } from "@/components/portfolio/Navbar";
@@ -12,46 +13,18 @@ import { Loader } from "@/components/portfolio/Loader";
 import { motion } from "framer-motion";
 
 const Index = () => {
-  const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      // Use requestAnimationFrame for smooth animation
-      requestAnimationFrame(() => {
-        const x = e.clientX - 15;
-        const y = e.clientY - 15;
-        
-        // Update cursor position with transform for better performance
-        const cursor = document.querySelector('.cursor-follower') as HTMLElement;
-        if (cursor) {
-          cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        }
-      });
-    };
-
-    document.addEventListener("mousemove", handleMouseMove);
-    
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
-  // Use the smooth scroll hook
-  useSmoothScroll();
-  
-  // Add smooth scrolling behavior for the entire site
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
     
-    // Initialize cursor follower effect
-    const cursorFollower = document.createElement("div");
-    cursorFollower.classList.add("cursor-follower");
-    document.body.appendChild(cursorFollower);
+    const cursor = document.createElement("div");
+    cursor.classList.add("cursor-follower");
+    document.body.appendChild(cursor);
 
     const handleMouseMove = (e: MouseEvent) => {
       requestAnimationFrame(() => {
-        cursorFollower.style.left = `${e.clientX}px`;
-        cursorFollower.style.top = `${e.clientY}px`;
+        if (cursor) {
+          cursor.style.transform = `translate3d(${e.clientX - 5}px, ${e.clientY - 5}px, 0)`;
+        }
       });
     };
 
@@ -60,12 +33,15 @@ const Index = () => {
     return () => {
       document.documentElement.style.scrollBehavior = "";
       document.removeEventListener("mousemove", handleMouseMove);
-      if (document.body.contains(cursorFollower)) {
-        document.body.removeChild(cursorFollower);
+      if (document.body.contains(cursor)) {
+        document.body.removeChild(cursor);
       }
     };
   }, []);
 
+  // Use the smooth scroll hook
+  useSmoothScroll();
+  
   return (
     <motion.div 
       className="min-h-screen bg-background text-foreground overflow-hidden"
@@ -73,9 +49,6 @@ const Index = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      {/* Custom cursor */}
-      <div className="cursor-follower" />
-      
       <Loader />
       <Navbar />
       <Hero />
