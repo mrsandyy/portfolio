@@ -21,19 +21,34 @@ const Index = () => {
     cursor.classList.add("cursor-follower");
     document.body.appendChild(cursor);
 
+    // Create outer ring for enhanced visual effect
+    const cursorRing = document.createElement("div");
+    cursorRing.classList.add("cursor-ring");
+    document.body.appendChild(cursorRing);
+
     let currentX = 0;
     let currentY = 0;
+    let ringX = 0;
+    let ringY = 0;
     let raf: number;
 
+    // More advanced lerp function with adjustable speed
     const lerp = (start: number, end: number, factor: number) => {
       return start + (end - start) * factor;
     };
 
     const updateCursor = () => {
-      currentX = lerp(currentX, mouseX, 0.15);
-      currentY = lerp(currentY, mouseY, 0.15);
-      cursor.style.left = `${currentX}px`;
-      cursor.style.top = `${currentY}px`;
+      // Main cursor follows with medium speed
+      currentX = lerp(currentX, mouseX, 0.2);
+      currentY = lerp(currentY, mouseY, 0.2);
+      
+      // Ring follows with slightly slower speed for trailing effect
+      ringX = lerp(ringX, mouseX, 0.15);
+      ringY = lerp(ringY, mouseY, 0.15);
+      
+      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+      cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      
       raf = requestAnimationFrame(updateCursor);
     };
 
@@ -45,15 +60,59 @@ const Index = () => {
       mouseY = e.clientY;
     };
 
+    // Function to handle element hover state
+    const handleMouseEnter = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      
+      if (target.tagName === 'A' || 
+          target.tagName === 'BUTTON' || 
+          target.hasAttribute('role') && target.getAttribute('role') === 'button' ||
+          target.classList.contains('project-card') ||
+          target.closest('.project-card') ||
+          target.closest('button') ||
+          target.closest('a')) {
+        
+        cursor.classList.add('cursor-hover');
+        cursorRing.classList.add('cursor-ring-hover');
+      }
+    };
+
+    // Function to handle element mouse leave
+    const handleMouseLeave = () => {
+      cursor.classList.remove('cursor-hover');
+      cursorRing.classList.remove('cursor-ring-hover');
+    };
+
     document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseover", handleMouseEnter);
+    document.addEventListener("mouseout", handleMouseLeave);
+    
+    // Add specific handling for click animation
+    document.addEventListener("mousedown", () => {
+      cursor.classList.add('cursor-click');
+      cursorRing.classList.add('cursor-ring-click');
+    });
+    
+    document.addEventListener("mouseup", () => {
+      cursor.classList.remove('cursor-click');
+      cursorRing.classList.remove('cursor-ring-click');
+    });
+    
     raf = requestAnimationFrame(updateCursor);
     
     return () => {
       document.documentElement.style.scrollBehavior = "";
       document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseover", handleMouseEnter);
+      document.removeEventListener("mouseout", handleMouseLeave);
+      document.removeEventListener("mousedown", () => {});
+      document.removeEventListener("mouseup", () => {});
       cancelAnimationFrame(raf);
       if (document.body.contains(cursor)) {
         document.body.removeChild(cursor);
+      }
+      if (document.body.contains(cursorRing)) {
+        document.body.removeChild(cursorRing);
       }
     };
   }, []);
