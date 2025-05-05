@@ -43,7 +43,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Sandeep Vishnoi
-              <div className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+              <div className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent pb-1">
                 Backend Engineer
               </div>
             </motion.h1>
