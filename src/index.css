@@ -217,13 +217,15 @@
     cursor: none !important;
   }
 
-  /* Enhanced custom cursor styles */
+  /* Enhanced custom cursor styles - Made fully opaque and more visible */
   .cursor-follower {
     @apply fixed pointer-events-none z-[9999];
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background: #6b84f3;
     border-radius: 50%;
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(107, 132, 243, 0.5);
     backface-visibility: hidden;
     transition: width 0.25s cubic-bezier(0.23, 1, 0.32, 1),
                 height 0.25s cubic-bezier(0.23, 1, 0.32, 1),
@@ -237,8 +239,9 @@
     @apply fixed pointer-events-none z-[9998];
     width: 30px;
     height: 30px;
-    border: 1px solid rgba(107, 132, 243, 0.5);
+    border: 2px solid rgba(107, 132, 243, 0.8);
     border-radius: 50%;
+    opacity: 1;
     backface-visibility: hidden;
     transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1),
                 height 0.4s cubic-bezier(0.23, 1, 0.32, 1),
@@ -252,6 +255,7 @@
     width: 20px;
     height: 20px;
     background: #8b5cf6;
+    opacity: 1;
     transform: translate(-50%, -50%) scale(1.5);
     transition: width 0.25s cubic-bezier(0.23, 1, 0.32, 1),
                 height 0.25s cubic-bezier(0.23, 1, 0.32, 1),
@@ -263,8 +267,9 @@
   .cursor-ring-hover {
     width: 40px;
     height: 40px;
-    border-color: rgba(139, 92, 246, 0.5);
+    border-color: rgba(139, 92, 246, 0.8);
     border-width: 2px;
+    opacity: 1;
     transform: translate(-50%, -50%) scale(1.2);
     transition: width 0.35s cubic-bezier(0.23, 1, 0.32, 1),
                 height 0.35s cubic-bezier(0.23, 1, 0.32, 1),
@@ -283,7 +288,7 @@
   /* Click animation for the ring */
   .cursor-ring-click {
     transform: translate(-50%, -50%) scale(0.9);
-    opacity: 0.7;
+    opacity: 0.9;
     border-color: rgba(107, 132, 243, 0.9);
     transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
                 opacity 0.15s ease-out,
