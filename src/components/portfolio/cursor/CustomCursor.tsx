@@ -61,7 +61,7 @@ export function CustomCursor() {
         className={`
           fixed z-[9999] pointer-events-none
           transform -translate-x-1/2 -translate-y-1/2 rounded-full
-          ${isClicking ? "scale-50" : "scale-100"}
+          ${isClicking ? "scale-75" : "scale-100"}
           ${isPointer ? "w-5 h-5 bg-portfolio-500/40" : "w-4 h-4 bg-portfolio-600"}
         `}
         style={innerStyle}
