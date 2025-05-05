@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button, MotionButton } from "@/components/ui/button";
 import { Menu, X, CircleCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -132,13 +131,13 @@ export function Navbar() {
             </motion.a>
           ))}
           <motion.div variants={itemVariants}>
-            <Button 
+            <MotionButton 
               className="bg-portfolio-600 hover:bg-portfolio-700 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Resume
-            </Button>
+            </MotionButton>
           </motion.div>
         </nav>
 
@@ -188,9 +187,13 @@ export function Navbar() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.3 }}
             >
-              <Button className="bg-portfolio-600 hover:bg-portfolio-700 w-full">
+              <MotionButton 
+                className="bg-portfolio-600 hover:bg-portfolio-700 w-full"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 Resume
-              </Button>
+              </MotionButton>
             </motion.div>
           </div>
         </motion.nav>
