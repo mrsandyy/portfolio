@@ -98,6 +98,7 @@ const Index = () => {
       cursorRing.classList.remove('cursor-ring-click');
     });
     
+    // Start animation
     raf = requestAnimationFrame(updateCursor);
     
     return () => {

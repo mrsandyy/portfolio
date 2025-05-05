@@ -7,7 +7,7 @@ export function HeroActions() {
   return (
     <>
       <motion.div 
-        className="flex gap-3 py-2"
+        className="flex gap-4 py-2"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
@@ -43,7 +43,7 @@ export function HeroActions() {
       </motion.div>
       
       <motion.div 
-        className="flex gap-4 pt-2"
+        className="flex flex-col sm:flex-row gap-4 pt-5"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}

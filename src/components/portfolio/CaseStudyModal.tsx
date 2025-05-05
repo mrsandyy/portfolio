@@ -45,27 +45,31 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-xl bg-gradient-to-br from-portfolio-50 via-white to-portfolio-50">
         <div className="grid md:grid-cols-5 gap-0">
-          {/* Left sidebar with project info */}
+          {/* Left sidebar with project info - Improved styling with lighter background */}
           <motion.div 
-            className="md:col-span-2 p-6 bg-portfolio-800 text-white flex flex-col"
+            className="md:col-span-2 p-6 bg-gradient-to-br from-portfolio-700 to-portfolio-600 text-white flex flex-col"
             initial="hidden"
             animate="visible"
             variants={stagger}
           >
             <motion.div variants={fadeInUp} className="mb-4">
-              <img src={image} alt={title} className="w-full h-40 object-cover rounded-lg mb-4 border-2 border-portfolio-600 shadow-lg" />
+              <div className="bg-white p-3 rounded-lg shadow-lg">
+                <img src={image} alt={title} className="w-full h-36 object-cover rounded-md" />
+              </div>
             </motion.div>
             
-            <motion.h3 variants={fadeInUp} className="text-xl font-bold mb-2 text-portfolio-100">{title}</motion.h3>
-            <motion.p variants={fadeInUp} className="text-sm text-portfolio-200 mb-4">{description}</motion.p>
+            <motion.div variants={fadeInUp} className="bg-portfolio-800/40 rounded-lg p-4 backdrop-blur-sm mb-4">
+              <h3 className="text-xl font-bold mb-2 text-white">{title}</h3>
+              <p className="text-sm text-portfolio-100">{description}</p>
+            </motion.div>
             
             <motion.div variants={fadeInUp} className="mb-4">
-              <h4 className="text-sm font-semibold mb-2 text-portfolio-300">Tech Stack</h4>
+              <h4 className="text-sm font-semibold mb-2 text-portfolio-200">Tech Stack</h4>
               <div className="flex flex-wrap gap-2 mb-4">
                 {caseStudy.mainStack.map(stack => (
                   <span 
                     key={stack} 
-                    className="flex items-center gap-1 bg-portfolio-700/80 px-2.5 py-1 rounded-full text-xs text-white font-medium border border-portfolio-600 hover:bg-portfolio-600 transition-colors"
+                    className="flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-full text-xs text-white font-medium border border-white/20 hover:bg-white/20 transition-colors"
                   >
                     {stack === "Node.js" && <Server className="h-3 w-3" />}
                     {stack === "TypeScript" && <Terminal className="h-3 w-3" />}
@@ -83,12 +87,12 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
             
             <motion.div variants={fadeInUp} className="flex gap-3 mt-auto pt-4">
               <a href={demoLink} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="sm" className="bg-portfolio-700 text-white border-portfolio-600 hover:bg-portfolio-600 transition-all">
+                <Button variant="outline" size="sm" className="bg-white text-portfolio-700 hover:bg-portfolio-100 hover:text-portfolio-800 transition-all border-none">
                   <ExternalLink className="h-4 w-4 mr-1" /> Live Demo
                 </Button>
               </a>
               <a href={repoLink} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="sm" className="bg-transparent text-white border-portfolio-300 hover:bg-portfolio-700/50 transition-all">
+                <Button variant="outline" size="sm" className="bg-transparent text-white border-white/50 hover:bg-white/10 transition-all">
                   <Github className="h-4 w-4 mr-1" /> View Code
                 </Button>
               </a>

@@ -17,7 +17,7 @@ const coreSkills = [
 
 export function Hero() {
   return (
-    <section id="home" className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-portfolio-50 to-white relative overflow-hidden">
+    <section id="home" className="min-h-screen pt-24 pb-20 bg-gradient-to-br from-portfolio-50 to-white relative overflow-hidden">
       <div className="container relative z-10">
         <div className="flex flex-col md:flex-row gap-12 md:gap-6 items-center justify-between">
           {/* Mobile: Image first, then content */}
@@ -43,9 +43,9 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Sandeep Vishnoi
-              <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent block md:ml-3 md:inline-block">
+              <div className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent">
                 Backend Engineer
-              </span>
+              </div>
             </motion.h1>
             
             <motion.p
