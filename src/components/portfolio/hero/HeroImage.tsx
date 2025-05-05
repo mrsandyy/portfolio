@@ -5,37 +5,61 @@ export function HeroImage() {
   // Check if the user prefers reduced motion
   const prefersReducedMotion = useReducedMotion();
   
-  // Use simplified animations if reduced motion is preferred
-  const animationSettings = prefersReducedMotion ? {
-    // Minimal animations for reduced motion preference
+  // Use minimal animations if reduced motion is preferred
+  const animationSettings = {
+    // Minimal animations for all users to improve performance
     circle: {
-      animate: { scale: 1 },
-      transition: { duration: 0 }
-    },
-    decorativeElements: {
-      animate: { y: 0, x: 0 },
-      transition: { duration: 0 }
-    },
-    rings: {
-      animate: { rotate: 0, scale: 1 },
-      transition: { duration: 0 }
-    }
-  } : {
-    // Full animations
-    circle: {
+      initial: { scale: 1 },
       animate: { scale: [1, 1.02, 1] },
-      transition: { duration: 8, repeat: Infinity, ease: "easeInOut", times: [0, 0.5, 1] }
+      transition: { 
+        duration: 8, 
+        repeat: Infinity, 
+        ease: "easeInOut", 
+        times: [0, 0.5, 1],
+        // Use discrete rather than continuous updates for better performance
+        restDelta: 0.01,
+      }
     },
     decorativeElements: {
-      animate1: { y: [0, -5, 0], x: [0, 5, 0] },
-      animate2: { y: [0, 5, 0], x: [0, -5, 0] },
-      transition: { duration: 6, repeat: Infinity, ease: "easeInOut", times: [0, 0.5, 1] }
+      animate1: { 
+        y: [0, -5, 0], 
+        x: [0, 5, 0] 
+      },
+      animate2: { 
+        y: [0, 5, 0], 
+        x: [0, -5, 0] 
+      },
+      transition: { 
+        duration: 6, 
+        repeat: Infinity, 
+        ease: "easeInOut", 
+        times: [0, 0.5, 1],
+        // Use discrete rather than continuous updates for better performance
+        restDelta: 0.01,
+      }
     },
     rings: {
       animate: { rotate: 360 },
-      transition: { duration: 40, repeat: Infinity, ease: "linear" }
+      transition: { 
+        duration: 60, // Slower rotation for better performance
+        repeat: Infinity, 
+        ease: "linear",
+        // Use discrete rather than continuous updates for better performance
+        restDelta: 0.1,
+      }
     }
   };
+
+  // Disable complex animations for reduced motion preference
+  if (prefersReducedMotion) {
+    animationSettings.circle.animate = { scale: 1 };
+    animationSettings.circle.transition = { duration: 0 };
+    animationSettings.decorativeElements.animate1 = { y: 0, x: 0 };
+    animationSettings.decorativeElements.animate2 = { y: 0, x: 0 };
+    animationSettings.decorativeElements.transition = { duration: 0 };
+    animationSettings.rings.animate = { rotate: 0 };
+    animationSettings.rings.transition = { duration: 0 };
+  }
 
   return (
     <motion.div 
@@ -48,6 +72,7 @@ export function HeroImage() {
         {/* Simplified animated background circle */}
         <motion.div 
           className="absolute w-64 h-64 rounded-full bg-gradient-to-br from-portfolio-300/30 to-blue-300/30"
+          initial={animationSettings.circle.initial}
           animate={animationSettings.circle.animate}
           transition={animationSettings.circle.transition}
         />
@@ -62,30 +87,36 @@ export function HeroImage() {
           />
         </div>
         
-        {/* Simplified gradient overlay */}
-        <div 
-          className="absolute inset-0 rounded-full bg-gradient-to-br from-portfolio-500/20 to-transparent z-10"
-        />
+        {/* Static gradient overlay instead of animated */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-portfolio-500/20 to-transparent z-10" />
         
-        {/* Decorative elements with optimized animations */}
-        <motion.div 
-          className="absolute bottom-0 right-0 w-10 h-10 bg-portfolio-500 rounded-full z-10"
-          animate={animationSettings.decorativeElements.animate1}
-          transition={animationSettings.decorativeElements.transition}
-        />
+        {/* Reduced number of decorative elements */}
+        {!prefersReducedMotion && (
+          <>
+            <motion.div 
+              className="absolute bottom-0 right-0 w-10 h-10 bg-portfolio-500 rounded-full z-10"
+              animate={animationSettings.decorativeElements.animate1}
+              transition={animationSettings.decorativeElements.transition}
+            />
+            
+            <motion.div 
+              className="absolute top-0 left-0 w-6 h-6 bg-portfolio-700 rounded-full z-10"
+              animate={animationSettings.decorativeElements.animate2}
+              transition={animationSettings.decorativeElements.transition}
+            />
+          </>
+        )}
         
-        <motion.div 
-          className="absolute top-0 left-0 w-6 h-6 bg-portfolio-700 rounded-full z-10"
-          animate={animationSettings.decorativeElements.animate2}
-          transition={animationSettings.decorativeElements.transition}
-        />
-        
-        {/* Simplified outer ring animation - visible on both mobile and desktop */}
-        <motion.div 
-          className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full border-2 border-dashed border-portfolio-400/30 z-5"
-          animate={animationSettings.rings.animate}
-          transition={animationSettings.rings.transition}
-        />
+        {/* Simplified outer ring animation - with CSS instead of JS animation when possible */}
+        {!prefersReducedMotion ? (
+          <motion.div 
+            className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full border-2 border-dashed border-portfolio-400/30 z-5"
+            animate={animationSettings.rings.animate}
+            transition={animationSettings.rings.transition}
+          />
+        ) : (
+          <div className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full border-2 border-dashed border-portfolio-400/30 z-5" />
+        )}
       </div>
     </motion.div>
   );

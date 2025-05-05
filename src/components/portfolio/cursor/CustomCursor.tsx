@@ -49,27 +49,28 @@ export function CustomCursor() {
     <>
       {/* Main cursor dot */}
       <div 
-        className={`fixed z-[9999] pointer-events-none transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-transform duration-100 ${
-          isClicking ? 'scale-75' : ''
-        } ${
-          isPointer ? 'w-5 h-5 bg-portfolio-500/40' : 'w-3 h-3 bg-portfolio-600'
-        }`}
+        className="fixed z-[9999] pointer-events-none w-3 h-3 bg-portfolio-600 rounded-full transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-100"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
+          transform: `translate(-50%, -50%) scale(${isClicking ? 0.75 : 1})`,
+          backgroundColor: isPointer ? 'rgba(107, 132, 243, 0.4)' : '#6b84f3',
+          width: isPointer ? '20px' : '12px',
+          height: isPointer ? '20px' : '12px',
         }}
       />
       
-      {/* Cursor ring */}
+      {/* Cursor ring - fixed positioning with explicit styles */}
       <div 
-        className={`fixed z-[9998] pointer-events-none transform -translate-x-1/2 -translate-y-1/2 rounded-full border-2 transition-all duration-300 ${
-          isClicking ? 'scale-90' : ''
-        } ${
-          isPointer ? 'w-8 h-8 border-portfolio-500' : 'w-8 h-8 border-portfolio-600/30'
-        }`}
+        className="fixed z-[9998] pointer-events-none rounded-full border-2 transition-all duration-300"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
+          transform: `translate(-50%, -50%) scale(${isClicking ? 0.9 : 1})`,
+          width: isPointer ? '32px' : '32px',
+          height: isPointer ? '32px' : '32px',
+          borderColor: isPointer ? 'rgba(107, 132, 243, 0.8)' : 'rgba(107, 132, 243, 0.3)',
+          borderWidth: '2px',
         }}
       />
     </>
