@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { ScrollRevealWrapper } from "@/components/portfolio/ScrollRevealWrapper";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { Navbar } from "@/components/portfolio/Navbar";
@@ -13,54 +13,66 @@ import { Loader } from "@/components/portfolio/Loader";
 import { motion } from "framer-motion";
 
 const Index = () => {
+  const cursorRef = useRef<HTMLDivElement | null>(null);
+  const cursorRingRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
     
-    // Create and add custom cursor
+    // Create cursor elements
     const cursor = document.createElement("div");
-    cursor.classList.add("cursor-follower");
+    cursor.classList.add("custom-cursor");
     document.body.appendChild(cursor);
+    cursorRef.current = cursor;
 
-    // Create outer ring for enhanced visual effect
     const cursorRing = document.createElement("div");
     cursorRing.classList.add("cursor-ring");
     document.body.appendChild(cursorRing);
+    cursorRingRef.current = cursorRing;
 
-    let currentX = 0;
-    let currentY = 0;
-    let ringX = 0;
-    let ringY = 0;
-    let raf: number;
+    // Set initial positions off-screen
+    cursor.style.transform = `translate(-100px, -100px)`;
+    cursorRing.style.transform = `translate(-100px, -100px)`;
 
-    // More advanced lerp function with adjustable speed
+    // Track mouse position with requestAnimationFrame for smoother performance
+    let mouseX = -100;
+    let mouseY = -100;
+    let cursorX = -100;
+    let cursorY = -100;
+    let ringX = -100;
+    let ringY = -100;
+
+    const updateCursor = () => {
+      // Apply easing for smooth movement
+      cursorX = lerp(cursorX, mouseX, 0.2);
+      cursorY = lerp(cursorY, mouseY, 0.2);
+      
+      ringX = lerp(ringX, mouseX, 0.15); // Slightly slower to create trailing effect
+      ringY = lerp(ringY, mouseY, 0.15);
+      
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+      }
+      
+      if (cursorRingRef.current) {
+        cursorRingRef.current.style.transform = `translate(${ringX}px, ${ringY}px)`;
+      }
+      
+      requestAnimationFrame(updateCursor);
+    };
+
+    // Linear interpolation function for smooth movement
     const lerp = (start: number, end: number, factor: number) => {
       return start + (end - start) * factor;
     };
 
-    const updateCursor = () => {
-      // Main cursor follows with medium speed
-      currentX = lerp(currentX, mouseX, 0.2);
-      currentY = lerp(currentY, mouseY, 0.2);
-      
-      // Ring follows with slightly slower speed for trailing effect
-      ringX = lerp(ringX, mouseX, 0.15);
-      ringY = lerp(ringY, mouseY, 0.15);
-      
-      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
-      cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-      
-      raf = requestAnimationFrame(updateCursor);
-    };
-
-    let mouseX = 0;
-    let mouseY = 0;
-
+    // Track mouse position
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     };
 
-    // Function to handle element hover state
+    // Handle element hover states
     const handleMouseEnter = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       
@@ -72,21 +84,36 @@ const Index = () => {
           target.closest('button') ||
           target.closest('a')) {
         
-        cursor.classList.add('cursor-hover');
-        cursorRing.classList.add('cursor-ring-hover');
+        if (cursorRef.current) cursorRef.current.classList.add('cursor-hover');
+        if (cursorRingRef.current) cursorRingRef.current.classList.add('ring-hover');
       }
     };
 
-    // Function to handle element mouse leave
+    // Handle element mouse leave
     const handleMouseLeave = () => {
-      cursor.classList.remove('cursor-hover');
-      cursorRing.classList.remove('cursor-ring-hover');
+      if (cursorRef.current) cursorRef.current.classList.remove('cursor-hover');
+      if (cursorRingRef.current) cursorRingRef.current.classList.remove('ring-hover');
     };
 
+    // Handle mouse click animations
+    const handleMouseDown = () => {
+      if (cursorRef.current) cursorRef.current.classList.add('cursor-click');
+      if (cursorRingRef.current) cursorRingRef.current.classList.add('ring-click');
+    };
+    
+    const handleMouseUp = () => {
+      if (cursorRef.current) cursorRef.current.classList.remove('cursor-click');
+      if (cursorRingRef.current) cursorRingRef.current.classList.remove('ring-click');
+    };
+
+    // Set up event listeners
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseover", handleMouseEnter);
     document.addEventListener("mouseout", handleMouseLeave);
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
     
+<<<<<<< HEAD
     // Add specific handling for click animation
     document.addEventListener("mousedown", () => {
       cursor.classList.add('cursor-click');
@@ -99,15 +126,20 @@ const Index = () => {
     });
     
     raf = requestAnimationFrame(updateCursor);
+=======
+    // Start animation loop
+    requestAnimationFrame(updateCursor);
+>>>>>>> f66aa10 (Fix: Improve UI and animations)
     
     return () => {
+      // Clean up on component unmount
       document.documentElement.style.scrollBehavior = "";
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseover", handleMouseEnter);
       document.removeEventListener("mouseout", handleMouseLeave);
-      document.removeEventListener("mousedown", () => {});
-      document.removeEventListener("mouseup", () => {});
-      cancelAnimationFrame(raf);
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
+      
       if (document.body.contains(cursor)) {
         document.body.removeChild(cursor);
       }
