@@ -1,7 +1,32 @@
 
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function HeroImage() {
+  const isMobile = useIsMobile();
+
+  // Simpler animations that work well across devices
+  const decorationVariants = {
+    pulse: {
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        repeatType: "loop" as const,
+        ease: "easeInOut"
+      }
+    },
+    float: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 6,
+        repeat: Infinity,
+        repeatType: "loop" as const,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return (
     <motion.div 
       className="relative mb-6 md:mb-10 w-full max-w-md mx-auto"
@@ -20,9 +45,21 @@ export function HeroImage() {
         </div>
         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-portfolio-500/20 to-transparent"></div>
         
-        {/* Add decorative elements */}
-        <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-portfolio-500 rounded-full animate-pulse-slow hidden md:block"></div>
-        <div className="absolute -top-2 -left-2 w-6 h-6 bg-portfolio-700 rounded-full animate-float hidden md:block"></div>
+        {/* Only show decorative elements on non-mobile devices */}
+        {!isMobile && (
+          <>
+            <motion.div 
+              className="absolute -bottom-2 -right-2 w-10 h-10 bg-portfolio-500 rounded-full"
+              variants={decorationVariants}
+              animate="pulse"
+            ></motion.div>
+            <motion.div 
+              className="absolute -top-2 -left-2 w-6 h-6 bg-portfolio-700 rounded-full"
+              variants={decorationVariants}
+              animate="float"
+            ></motion.div>
+          </>
+        )}
       </div>
     </motion.div>
   );

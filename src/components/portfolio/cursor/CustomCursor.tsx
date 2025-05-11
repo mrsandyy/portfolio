@@ -1,82 +1,80 @@
-import { useEffect, useState } from "react";
+
+import { useState, useEffect } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function CustomCursor() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isPointer, setIsPointer] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
+
+  // Don't show custom cursor on mobile
+  if (isMobile) return null;
 
   useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => {
-      const { clientX: x, clientY: y } = e;
-      setPosition({ x, y });
-
-      const el = document.elementFromPoint(x, y);
-      const hoveringInteractive =
-        (el?.tagName === "A" || el?.tagName === "BUTTON") ||
-        !!el?.closest("a, button") ||
-        el?.classList.contains("project-card") ||
-        !!el?.closest(".project-card");
-
-      setIsPointer(hoveringInteractive);
+    // Helper function to check if the element or its parents have cursor:pointer
+    const hasPointerCursor = (element: Element | null): boolean => {
+      if (!element || element === document.documentElement) {
+        return false;
+      }
+      
+      const computedStyle = window.getComputedStyle(element);
+      if (computedStyle.cursor === 'pointer') {
+        return true;
+      }
+      
+      return hasPointerCursor(element.parentElement);
     };
 
-    const onMouseDown = () => setIsClicking(true);
-    const onMouseUp = () => setIsClicking(false);
+    const handleMouseMove = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+      setIsPointer(hasPointerCursor(document.elementFromPoint(e.clientX, e.clientY)));
+      
+      // Show cursor after first movement
+      if (!isVisible) {
+        setIsVisible(true);
+      }
+    };
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mouseup", onMouseUp);
-    document.documentElement.style.cursor = "none";
+    const handleMouseDown = () => setIsClicking(true);
+    const handleMouseUp = () => setIsClicking(false);
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mouseup", onMouseUp);
-      document.documentElement.style.cursor = "auto";
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, []);
+  }, [isVisible]);
 
-  const { x, y } = position;
-
-  // Separate inline styles for inner and outer circles
-  const innerStyle: React.CSSProperties = {
-    left: `${x}px`,
-    top: `${y}px`,
-    transition: isClicking
-      ? "left 100ms ease-out, top 100ms ease-out, transform 200ms ease-out, background-color 200ms ease-out"
-      : "left 100ms ease-out, top 100ms ease-out, transform 200ms ease-out, background-color 200ms ease-out",
-  };
-  const outerStyle: React.CSSProperties = {
-    left: `${x}px`,
-    top: `${y}px`,
-    transition: isClicking
-      ? "left 200ms ease-out, top 200ms ease-out, transform 250ms ease-in-out, border-color 250ms ease-in-out"
-      : "left 200ms ease-out, top 200ms ease-out, transform 250ms ease-in-out, border-color 250ms ease-in-out",
-  };
+  // Apply styles based on state
+  const cursorClasses = `custom-cursor ${isPointer ? 'cursor-hover' : ''} ${isClicking ? 'cursor-click' : ''} ${isVisible ? 'opacity-100' : 'opacity-0'}`;
+  
+  const ringClasses = `cursor-ring ${isPointer ? 'ring-hover' : ''} ${isClicking ? 'ring-click' : ''} ${isVisible ? 'opacity-100' : 'opacity-0'}`;
 
   return (
     <>
-      {/* Inner dot: fast snap with smooth scale/color */}
-      <div
-        className={`
-          fixed z-[9999] pointer-events-none
-          transform -translate-x-1/2 -translate-y-1/2 rounded-full
-          ${isClicking ? "scale-75" : "scale-100"}
-          ${isPointer ? "w-5 h-5 bg-portfolio-500/40" : "w-4 h-4 bg-portfolio-600"}
-        `}
-        style={innerStyle}
+      <div 
+        className={cursorClasses}
+        style={{ 
+          transform: `translate(${position.x}px, ${position.y}px)`
+        }}
       />
-
-      {/* Outer ring: lagging follow with smooth scale/color */}
-      <div
-        className={`
-          fixed z-[9998] pointer-events-none
-          transform -translate-x-1/2 -translate-y-1/2 rounded-full border-2
-          w-8 h-8
-          ${isClicking ? "scale-75" : "scale-100"}
-          ${isPointer ? "border-portfolio-500" : "border-portfolio-600/30"}
-        `}
-        style={outerStyle}
+      <div 
+        className={ringClasses}
+        style={{ 
+          transform: `translate(${position.x}px, ${position.y}px)`
+        }}
       />
     </>
   );
