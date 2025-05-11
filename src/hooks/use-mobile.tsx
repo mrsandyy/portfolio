@@ -10,11 +10,13 @@ export function useBreakpoint() {
   const [windowWidth, setWindowWidth] = React.useState<number>(
     typeof window !== 'undefined' ? window.innerWidth : 0
   );
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
-    // Skip effect during SSR
-    if (typeof window === 'undefined') return;
+    // Mark component as mounted
+    setMounted(true);
     
+    // Handle resize events
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
@@ -29,10 +31,11 @@ export function useBreakpoint() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Only return responsive values after mounting to prevent hydration mismatch
   return {
-    isMobile: windowWidth < MOBILE_BREAKPOINT,
-    isTablet: windowWidth >= MOBILE_BREAKPOINT && windowWidth < TABLET_BREAKPOINT,
-    isDesktop: windowWidth >= TABLET_BREAKPOINT
+    isMobile: mounted && windowWidth < MOBILE_BREAKPOINT,
+    isTablet: mounted && windowWidth >= MOBILE_BREAKPOINT && windowWidth < TABLET_BREAKPOINT,
+    isDesktop: mounted && windowWidth >= TABLET_BREAKPOINT
   };
 }
 

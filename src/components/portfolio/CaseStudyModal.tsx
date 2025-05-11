@@ -1,12 +1,12 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogDescription } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerHeader, DrawerDescription } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Github, ExternalLink, Database, Server, Cpu, Code, Terminal, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useBreakpoint } from "@/hooks/use-mobile";
 
 interface CaseStudyModalProps {
   open: boolean;
@@ -29,8 +29,7 @@ interface CaseStudyModalProps {
 
 export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalProps) {
   if (!project) return null;
-  const isMobile = useIsMobile();
-  const { title, description, image, tags, demoLink, repoLink, caseStudy } = project;
+  const { isMobile } = useBreakpoint();
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -45,16 +44,15 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
     }
   };
 
-  // For mobile devices, use the Drawer component which is designed for mobile
+  // For mobile devices, use the Drawer component with unified scrolling
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent className="px-0 py-0 overflow-hidden rounded-t-xl max-h-[85vh]">
-          <div className="grid grid-cols-1 rounded-t-xl overflow-hidden">
-            {/* Content container with two scrollable sections */}
-            <div className="max-h-[85vh] flex flex-col">
-              {/* Top section with project info - scrollable */}
-              <ScrollArea className="flex-none bg-gradient-to-br from-portfolio-700 to-portfolio-600 text-white p-5 max-h-[40vh]">
+          <ScrollArea className="max-h-[85vh]">
+            <div className="flex flex-col">
+              {/* Top section with project info */}
+              <div className="bg-gradient-to-br from-portfolio-700 to-portfolio-600 text-white p-4 md:p-5">
                 <div className="mb-4">
                   <div className="bg-white p-1 rounded-lg shadow-lg">
                     <img src={image} alt={title} className="w-full h-28 object-cover rounded-md" />
@@ -100,10 +98,10 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
                     </Button>
                   </a>
                 </div>
-              </ScrollArea>
+              </div>
               
-              {/* Bottom section with details - separately scrollable */}
-              <ScrollArea className="flex-1 px-5 py-6 max-h-[45vh]">
+              {/* Bottom section with details */}
+              <div className="px-4 md:px-5 py-6">
                 <DrawerHeader className="mb-5 text-left px-0">
                   <div className="flex items-start justify-between mb-2 flex-col gap-2">
                     <h2 className="text-xl font-bold text-portfolio-800">{title}</h2>
@@ -133,13 +131,13 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
                           className="flex gap-2 text-portfolio-700"
                         >
                           <CheckCircle className="h-5 w-5 text-portfolio-600 flex-shrink-0 mt-0.5" />
-                          <span className="text-xs">{point}</span>
+                          <span className="text-xs md:text-sm">{point}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   
-                  <div className="pt-2 mt-4">
+                  <div className="pt-2 mt-4 pb-6">
                     <div className="flex justify-between items-center">
                       <h3 className="font-bold text-portfolio-800">Key Achievements</h3>
                       <span className="text-xs bg-portfolio-200 text-portfolio-700 px-2 py-1 rounded-full">Lead Developer Role</span>
@@ -156,9 +154,9 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
                     </div>
                   </div>
                 </div>
-              </ScrollArea>
+              </div>
             </div>
-          </div>
+          </ScrollArea>
         </DrawerContent>
       </Drawer>
     );
