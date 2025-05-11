@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useBreakpoint } from "@/hooks/use-mobile";
 
 const highlights = [
   { label: "Experience", value: "5+ yrs", desc: "Professional Engineering" },
@@ -10,7 +10,7 @@ const highlights = [
 ];
 
 export function HeroHighlights() {
-  const isMobile = useIsMobile();
+  const { isMobile } = useBreakpoint();
 
   // Simplified animations for better performance
   const containerVariants = {
