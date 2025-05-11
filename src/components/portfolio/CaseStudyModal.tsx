@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogDescription } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerHeader, DrawerDescription } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -28,8 +28,11 @@ interface CaseStudyModalProps {
 }
 
 export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalProps) {
+  // Early return if no project
   if (!project) return null;
-  const { isMobile } = useBreakpoint();
+  
+  // Get responsive state
+  const breakpoint = useBreakpoint();
   
   // Destructure the project properties for cleaner code
   const { title, description, image, demoLink, repoLink, caseStudy, tags } = project;
@@ -47,8 +50,8 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
     }
   };
 
-  // For mobile devices, use the Drawer component with unified scrolling
-  if (isMobile) {
+  // For mobile devices, use the Drawer component
+  if (breakpoint.isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent className="px-0 py-0 overflow-hidden rounded-t-xl max-h-[85vh]">
