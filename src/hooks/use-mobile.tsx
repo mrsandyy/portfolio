@@ -7,34 +7,35 @@ const TABLET_BREAKPOINT = 1024;
 
 // Create a single useBreakpoint hook that handles all size checks
 export function useBreakpoint() {
-  // Always initialize these state variables regardless of environment
+  // Initialize state with default values
   const [windowWidth, setWindowWidth] = React.useState<number>(0);
-  const [mounted, setMounted] = React.useState(false);
+  const [isMounted, setIsMounted] = React.useState(false);
 
   // useEffect will only run on the client
   React.useEffect(() => {
-    // Update width immediately and mark component as mounted
-    setWindowWidth(window.innerWidth);
-    setMounted(true);
-    
-    // Handle resize events
-    const handleResize = () => {
+    // Function to update the width
+    const updateWidth = () => {
       setWindowWidth(window.innerWidth);
     };
+
+    // Update width immediately and mark component as mounted
+    updateWidth();
+    setIsMounted(true);
     
     // Add event listener
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", updateWidth);
     
     // Clean up
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
-  // Always calculate these values (but use mounted flag to determine if they should be "real")
-  const isMobile = mounted && windowWidth < MOBILE_BREAKPOINT;
-  const isTablet = mounted && windowWidth >= MOBILE_BREAKPOINT && windowWidth < TABLET_BREAKPOINT;
-  const isDesktop = mounted && windowWidth >= TABLET_BREAKPOINT;
+  // Calculate breakpoint values - only use real values after mounting
+  const width = isMounted ? windowWidth : 0;
+  const isMobile = width < MOBILE_BREAKPOINT;
+  const isTablet = width >= MOBILE_BREAKPOINT && width < TABLET_BREAKPOINT;
+  const isDesktop = width >= TABLET_BREAKPOINT;
 
-  return { isMobile, isTablet, isDesktop };
+  return { isMobile, isTablet, isDesktop, isMounted };
 }
 
 // Maintain backward compatibility with existing code
