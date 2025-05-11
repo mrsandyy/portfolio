@@ -30,6 +30,9 @@ interface CaseStudyModalProps {
 export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalProps) {
   if (!project) return null;
   const { isMobile } = useBreakpoint();
+  
+  // Destructure the project properties for cleaner code
+  const { title, description, image, demoLink, repoLink, caseStudy, tags } = project;
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
