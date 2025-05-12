@@ -57,27 +57,29 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
           Backend Role: Lead Architect & API Developer
         </p>
         <p className="text-muted-foreground mb-4 flex-1">{description}</p>
-        <div className="flex gap-3 mt-auto pt-3">
-          <a
-            href={demoLink}
-            className="flex items-center gap-1 text-sm font-medium text-portfolio-600 hover:text-portfolio-700 transition-colors"
-            onClick={(e) => e.stopPropagation()}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ExternalLink className="h-4 w-4" /> Demo
-          </a>
-          <a
-            href={repoLink}
-            className="flex items-center gap-1 text-sm font-medium text-portfolio-600 hover:text-portfolio-700 transition-colors"
-            onClick={(e) => e.stopPropagation()}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Github className="h-4 w-4" /> Code
-          </a>
+        <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 mt-auto pt-3 items-center justify-between">
+          <div className="flex gap-3">
+            <a
+              href={demoLink}
+              className="flex items-center gap-1 text-sm font-medium text-portfolio-600 hover:text-portfolio-700 transition-colors"
+              onClick={(e) => e.stopPropagation()}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink className="h-4 w-4" /> Demo
+            </a>
+            <a
+              href={repoLink}
+              className="flex items-center gap-1 text-sm font-medium text-portfolio-600 hover:text-portfolio-700 transition-colors"
+              onClick={(e) => e.stopPropagation()}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="h-4 w-4" /> Code
+            </a>
+          </div>
           <button
-            className="ml-auto bg-portfolio-700 text-white px-3 py-1 rounded-lg text-xs font-semibold shadow hover:bg-portfolio-900 transition"
+            className="bg-portfolio-700 text-white px-3 py-1 rounded-lg text-xs font-semibold shadow hover:bg-portfolio-900 transition whitespace-nowrap"
             onClick={e => { e.stopPropagation(); onClick(); }}
           >
             In-Depth Case Study

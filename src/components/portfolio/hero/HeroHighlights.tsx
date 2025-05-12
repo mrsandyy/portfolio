@@ -46,8 +46,8 @@ export function HeroHighlights() {
           variants={itemVariants}
           whileHover={{ scale: isMobile ? 1 : 1.03 }}
         >
-          <span className="text-xs uppercase font-semibold text-portfolio-700 tracking-wide">{h.label}</span>
-          <span className="text-2xl md:text-3xl font-bold text-portfolio-800 leading-tight">{h.value}</span>
+          <span className="text-xs uppercase font-semibold text-portfolio-700 tracking-wide text-center">{h.label}</span>
+          <span className="text-xl sm:text-2xl md:text-3xl font-bold text-portfolio-800 leading-tight">{h.value}</span>
           <span className="text-xs text-portfolio-600 text-center">{h.desc}</span>
         </motion.div>
       ))}

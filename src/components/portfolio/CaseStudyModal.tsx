@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useMemo } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogDescription } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerHeader, DrawerDescription } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -28,8 +28,23 @@ interface CaseStudyModalProps {
 }
 
 export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalProps) {
-  // Get responsive state - always call hooks at the top level
+  // Always call hooks at the top level - before any conditional returns
   const { isMobile } = useBreakpoint();
+  
+  // Create memoized animations to avoid recreating them on every render
+  const animations = useMemo(() => ({
+    fadeInUp: {
+      hidden: { opacity: 0, y: 20 },
+      visible: { opacity: 1, y: 0 }
+    },
+    stagger: {
+      visible: {
+        transition: {
+          staggerChildren: 0.1
+        }
+      }
+    }
+  }), []);
   
   // Early return if no project (after hooks are called)
   if (!project) return null;
@@ -37,32 +52,24 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
   // Destructure the project properties for cleaner code
   const { title, description, image, demoLink, repoLink, caseStudy, tags } = project;
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  };
-
-  const stagger = {
-    visible: {
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
   // Render different UI based on device type
   if (isMobile) {
     // For mobile devices, use the Drawer component
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent className="px-0 py-0 overflow-hidden rounded-t-xl max-h-[85vh]">
-          <ScrollArea className="max-h-[85vh]">
+          <ScrollArea className="max-h-[85vh] h-[80vh] overflow-y-auto">
             <div className="flex flex-col">
               {/* Top section with project info */}
               <div className="bg-gradient-to-br from-portfolio-700 to-portfolio-600 text-white p-4 md:p-5">
                 <div className="mb-4">
                   <div className="bg-white p-1 rounded-lg shadow-lg">
-                    <img src={image} alt={title} className="w-full h-28 object-cover rounded-md" />
+                    <img 
+                      src={image} 
+                      alt={title} 
+                      className="w-full h-28 object-cover rounded-md" 
+                      style={{ aspectRatio: "16/9", objectFit: "cover" }}
+                    />
                   </div>
                 </div>
                 
@@ -108,7 +115,7 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
               </div>
               
               {/* Bottom section with details */}
-              <div className="px-4 md:px-5 py-6">
+              <div className="px-4 py-6">
                 <DrawerHeader className="mb-5 text-left px-0">
                   <div className="flex items-start justify-between mb-2 flex-col gap-2">
                     <h2 className="text-xl font-bold text-portfolio-800">{title}</h2>
@@ -178,20 +185,25 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
               className="md:col-span-2 p-5 md:p-6 bg-gradient-to-br from-portfolio-700 to-portfolio-600 text-white flex flex-col"
               initial="hidden"
               animate="visible"
-              variants={stagger}
+              variants={animations.stagger}
             >
-              <motion.div variants={fadeInUp} className="mb-4">
+              <motion.div variants={animations.fadeInUp} className="mb-4">
                 <div className="bg-white p-1 rounded-lg shadow-lg">
-                  <img src={image} alt={title} className="w-full h-28 md:h-36 object-cover rounded-md" />
+                  <img 
+                    src={image} 
+                    alt={title} 
+                    className="w-full h-28 md:h-36 object-cover rounded-md" 
+                    style={{ aspectRatio: "16/9", objectFit: "cover" }}
+                  />
                 </div>
               </motion.div>
               
-              <motion.div variants={fadeInUp} className="bg-portfolio-800/40 rounded-lg p-4 backdrop-blur-sm mb-4">
+              <motion.div variants={animations.fadeInUp} className="bg-portfolio-800/40 rounded-lg p-4 backdrop-blur-sm mb-4">
                 <h3 className="text-lg md:text-xl font-bold mb-2 text-white">{title}</h3>
                 <p className="text-xs md:text-sm text-portfolio-100">{description}</p>
               </motion.div>
               
-              <motion.div variants={fadeInUp} className="mb-4">
+              <motion.div variants={animations.fadeInUp} className="mb-4">
                 <h4 className="text-sm font-semibold mb-2 text-portfolio-200">Tech Stack</h4>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {caseStudy.mainStack.map(stack => (
@@ -213,7 +225,7 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
                 </div>
               </motion.div>
               
-              <motion.div variants={fadeInUp} className="flex gap-3 mt-auto pt-4">
+              <motion.div variants={animations.fadeInUp} className="flex gap-3 mt-auto pt-4">
                 <a href={demoLink} target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="sm" className="bg-white text-portfolio-700 hover:bg-portfolio-100 hover:text-portfolio-800 transition-all border-none">
                     <ExternalLink className="h-4 w-4 mr-1" /> Live Demo
@@ -232,10 +244,10 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
               className="md:col-span-3 px-5 py-6 md:px-7 md:py-8"
               initial="hidden"
               animate="visible"
-              variants={stagger}
+              variants={animations.stagger}
             >
               <DialogHeader className="mb-5 md:mb-6">
-                <motion.div variants={fadeInUp}>
+                <motion.div variants={animations.fadeInUp}>
                   <div className="flex items-start md:items-center justify-between mb-2 flex-col md:flex-row gap-2 md:gap-0">
                     <DialogHeader className="p-0 space-y-0">
                       <h2 className="text-xl md:text-2xl font-bold text-portfolio-800">{title}</h2>
@@ -249,20 +261,20 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
               </DialogHeader>
               
               <div className="space-y-5 md:space-y-6">
-                <motion.div variants={fadeInUp} className="bg-portfolio-50 p-4 rounded-lg border-l-4 border-portfolio-600">
+                <motion.div variants={animations.fadeInUp} className="bg-portfolio-50 p-4 rounded-lg border-l-4 border-portfolio-600">
                   <h3 className="font-bold text-portfolio-800 mb-2 flex items-center">
                     <Code className="h-5 w-5 mr-2 text-portfolio-600" /> Technical Challenge
                   </h3>
                   <p className="text-portfolio-700 text-sm">{caseStudy.challenges}</p>
                 </motion.div>
                 
-                <motion.div variants={fadeInUp}>
+                <motion.div variants={animations.fadeInUp}>
                   <h3 className="font-bold text-portfolio-800 mb-3 flex items-center">
                     <Server className="h-5 w-5 mr-2 text-portfolio-600" /> Back-End Highlights
                   </h3>
                   <motion.ul 
                     className="space-y-2 md:space-y-3 pl-2"
-                    variants={stagger}
+                    variants={animations.stagger}
                     initial="hidden"
                     animate="visible"
                   >
@@ -270,7 +282,7 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
                       <motion.li 
                         key={i} 
                         className="flex gap-2 md:gap-3 text-portfolio-700"
-                        variants={fadeInUp}
+                        variants={animations.fadeInUp}
                       >
                         <CheckCircle className="h-5 w-5 text-portfolio-600 flex-shrink-0 mt-0.5" />
                         <span className="text-xs md:text-sm">{point}</span>
@@ -279,7 +291,7 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
                   </motion.ul>
                 </motion.div>
                 
-                <motion.div variants={fadeInUp} className="pt-2 mt-4">
+                <motion.div variants={animations.fadeInUp} className="pt-2 mt-4">
                   <div className="flex justify-between items-center">
                     <h3 className="font-bold text-portfolio-800">Key Achievements</h3>
                     <span className="text-xs bg-portfolio-200 text-portfolio-700 px-2 py-1 rounded-full">Lead Developer Role</span>

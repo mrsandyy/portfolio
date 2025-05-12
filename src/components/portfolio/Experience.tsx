@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Briefcase, GraduationCap } from "lucide-react";
@@ -84,10 +85,10 @@ export function Experience() {
                   {/* Timeline dot */}
                   <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-portfolio-600 border-4 border-background"></div>
                   <Card className="relative hover:border-portfolio-300 transition-colors duration-300">
-                    <CardContent className="p-6">
-                      <div className="flex justify-between mb-1">
+                    <CardContent className="p-4 md:p-6">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-1">
                         <h4 className="text-lg font-semibold text-foreground">{job.role}</h4>
-                        <span className="text-xs font-bold px-2 py-1 bg-portfolio-100 text-portfolio-800 rounded-full">{job.duration}</span>
+                        <span className="text-xs font-bold px-2 py-1 bg-portfolio-100 text-portfolio-800 rounded-full inline-block w-auto">{job.duration}</span>
                       </div>
                       <div className="text-xs text-portfolio-600 font-medium mb-1">{job.company}</div>
                       {/* Only show achievements, no paragraphs */}
@@ -119,10 +120,10 @@ export function Experience() {
                   {/* Timeline dot */}
                   <div className="absolute -left-[41px] w-5 h-5 rounded-full bg-portfolio-600 border-4 border-background"></div>
                   <Card className="relative hover:border-portfolio-300 transition-colors duration-300">
-                    <CardContent className="p-6">
-                      <div className="flex justify-between mb-1">
+                    <CardContent className="p-4 md:p-6">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-1">
                         <h4 className="text-lg font-semibold text-foreground">{edu.degree}</h4>
-                        <span className="text-xs font-bold px-2 py-1 bg-portfolio-100 text-portfolio-800 rounded-full">{edu.duration}</span>
+                        <span className="text-xs font-bold px-2 py-1 bg-portfolio-100 text-portfolio-800 rounded-full inline-block w-auto">{edu.duration}</span>
                       </div>
                       <div className="text-xs text-portfolio-600 font-medium mb-1">{edu.institution}</div>
                       {/* Always bullet points */}

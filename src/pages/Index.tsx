@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { ScrollRevealWrapper } from "@/components/portfolio/ScrollRevealWrapper";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { Navbar } from "@/components/portfolio/Navbar";
@@ -12,18 +12,22 @@ import { Footer } from "@/components/portfolio/Footer";
 import { Loader } from "@/components/portfolio/Loader";
 import { CustomCursor } from "@/components/portfolio/cursor/CustomCursor";
 import { motion } from "framer-motion";
+import { useBreakpoint } from "@/hooks/use-mobile";
 
 const Index = () => {
-  useEffect(() => {
+  // Always call all hooks at the top level
+  const { isMounted } = useBreakpoint();
+  
+  // Use the smooth scroll hook
+  useSmoothScroll();
+  
+  React.useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
     
     return () => {
       document.documentElement.style.scrollBehavior = "";
     };
   }, []);
-
-  // Use the smooth scroll hook
-  useSmoothScroll();
   
   return (
     <motion.div 
