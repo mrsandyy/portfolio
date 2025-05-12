@@ -46,17 +46,17 @@ export function HeroHighlights() {
       {highlights.map((h) => (
         <motion.div 
           key={h.label} 
-          className="flex flex-col items-center p-3 md:p-4 rounded-xl bg-white border-2 border-portfolio-200 shadow-md hover:shadow-lg transition-all duration-300"
+          className="flex flex-col items-center justify-between p-3 md:p-4 rounded-xl bg-white border-2 border-portfolio-200 shadow-md hover:shadow-lg transition-all duration-300"
           variants={itemVariants}
           whileHover={{ scale: hoverScale }}
         >
-          <span className="text-xs uppercase font-semibold text-portfolio-700 tracking-wide text-center mb-1.5">
+          <span className="text-xs uppercase font-semibold text-portfolio-700 tracking-wide text-center">
             {h.label}
           </span>
-          <span className="text-xl sm:text-2xl md:text-3xl font-bold text-portfolio-800 leading-none mb-1.5">
+          <span className="text-xl sm:text-2xl md:text-3xl font-bold text-portfolio-800 leading-none my-1">
             {h.value}
           </span>
-          <span className="text-xs md:text-sm text-portfolio-600 text-center mt-0.5">
+          <span className="text-xs md:text-sm text-portfolio-600 text-center">
             {h.desc}
           </span>
         </motion.div>

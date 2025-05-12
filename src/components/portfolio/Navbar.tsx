@@ -49,7 +49,7 @@ export function Navbar() {
     }
   };
 
-  // Mobile menu animation variants
+  // Mobile menu animation variants with improved timing
   const menuVariants = {
     closed: { 
       opacity: 0,
@@ -69,15 +69,27 @@ export function Navbar() {
         duration: 0.3,
         when: "beforeChildren",
         staggerChildren: 0.05,
-        delayChildren: 0.1,
+        delayChildren: 0.05,
         ease: "easeOut"
       }
     }
   };
 
   const menuItemVariants = {
-    closed: { opacity: 0, y: -10 },
-    open: { opacity: 1, y: 0 }
+    closed: { 
+      opacity: 0, 
+      y: -10,
+      transition: { 
+        duration: 0.1 
+      }
+    },
+    open: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.2 
+      }
+    }
   };
 
   const navbarBg = isScrolled
@@ -138,15 +150,15 @@ export function Navbar() {
         </Button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Improved backdrop and animation synchronization */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.nav 
             className={cn(
               "md:hidden absolute top-full left-0 w-full overflow-hidden",
               isScrolled 
-                ? "bg-background/95 backdrop-blur-md shadow-lg"
-                : "bg-white/95 backdrop-blur-md shadow-lg"
+                ? "bg-background/80 backdrop-blur-md shadow-lg"
+                : "bg-portfolio-50/90 backdrop-blur-md shadow-lg border-b border-portfolio-200/50"
             )}
             initial="closed"
             animate="open"
