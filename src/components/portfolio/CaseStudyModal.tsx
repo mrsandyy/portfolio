@@ -1,5 +1,5 @@
 
-import React, { useMemo } from "react";
+import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogDescription } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerHeader, DrawerDescription } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -28,11 +28,11 @@ interface CaseStudyModalProps {
 }
 
 export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalProps) {
-  // Always call hooks at the top level - before any conditional returns
+  // Always call hooks at the top level - before any early returns or conditions
   const { isMobile } = useBreakpoint();
   
   // Create memoized animations to avoid recreating them on every render
-  const animations = useMemo(() => ({
+  const animations = React.useMemo(() => ({
     fadeInUp: {
       hidden: { opacity: 0, y: 20 },
       visible: { opacity: 1, y: 0 }
@@ -57,8 +57,8 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
     // For mobile devices, use the Drawer component
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
-        <DrawerContent className="px-0 py-0 overflow-hidden rounded-t-xl max-h-[85vh]">
-          <ScrollArea className="max-h-[85vh] h-[80vh] overflow-y-auto">
+        <DrawerContent className="px-0 py-0 overflow-hidden rounded-t-xl h-[85vh]">
+          <ScrollArea className="h-[85vh] overflow-y-auto">
             <div className="flex flex-col">
               {/* Top section with project info */}
               <div className="bg-gradient-to-br from-portfolio-700 to-portfolio-600 text-white p-4 md:p-5">
@@ -67,7 +67,7 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
                     <img 
                       src={image} 
                       alt={title} 
-                      className="w-full h-28 object-cover rounded-md" 
+                      className="w-full object-cover rounded-md" 
                       style={{ aspectRatio: "16/9", objectFit: "cover" }}
                     />
                   </div>

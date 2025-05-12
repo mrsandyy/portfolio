@@ -10,7 +10,8 @@ const highlights = [
 ];
 
 export function HeroHighlights() {
-  const { isMobile } = useBreakpoint();
+  // Always call hooks unconditionally at the top level
+  const { isMobile, isMounted } = useBreakpoint();
 
   // Simplified animations for better performance
   const containerVariants = {
@@ -44,11 +45,17 @@ export function HeroHighlights() {
           key={h.label} 
           className="flex flex-col items-center p-3 md:p-4 rounded-xl bg-white border-2 border-portfolio-200 shadow-md hover:shadow-lg transition-all duration-300"
           variants={itemVariants}
-          whileHover={{ scale: isMobile ? 1 : 1.03 }}
+          whileHover={{ scale: isMounted && !isMobile ? 1.03 : 1 }}
         >
-          <span className="text-xs uppercase font-semibold text-portfolio-700 tracking-wide text-center">{h.label}</span>
-          <span className="text-xl sm:text-2xl md:text-3xl font-bold text-portfolio-800 leading-tight">{h.value}</span>
-          <span className="text-xs text-portfolio-600 text-center">{h.desc}</span>
+          <span className="text-xs uppercase font-semibold text-portfolio-700 tracking-wide text-center mb-1">
+            {h.label}
+          </span>
+          <span className="text-xl sm:text-2xl md:text-3xl font-bold text-portfolio-800 leading-tight">
+            {h.value}
+          </span>
+          <span className="text-xs text-portfolio-600 text-center mt-1">
+            {h.desc}
+          </span>
         </motion.div>
       ))}
     </motion.div>

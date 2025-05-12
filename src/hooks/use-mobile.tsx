@@ -7,8 +7,8 @@ const TABLET_BREAKPOINT = 1024;
 
 // Create a single useBreakpoint hook that handles all size checks
 export function useBreakpoint() {
-  // Always initialize state with default values
-  const [windowWidth, setWindowWidth] = React.useState<number>(0);
+  // Always initialize state with default values that won't change
+  const [windowWidth, setWindowWidth] = React.useState(0);
   const [isMounted, setIsMounted] = React.useState(false);
 
   // useEffect will only run on the client
@@ -32,13 +32,11 @@ export function useBreakpoint() {
   }, []);
 
   // Calculate breakpoint values based on current width
-  // Always calculate these in the same order
   const width = isMounted ? windowWidth : 0;
   const isMobile = width < MOBILE_BREAKPOINT;
   const isTablet = width >= MOBILE_BREAKPOINT && width < TABLET_BREAKPOINT;
   const isDesktop = width >= TABLET_BREAKPOINT;
 
-  // Return an object with all the values
   return { 
     isMobile, 
     isTablet, 
@@ -50,7 +48,6 @@ export function useBreakpoint() {
 
 // Maintain backward compatibility with existing code
 export function useIsMobile() {
-  // Always call useBreakpoint in the same way
   const { isMobile } = useBreakpoint();
   return isMobile;
 }

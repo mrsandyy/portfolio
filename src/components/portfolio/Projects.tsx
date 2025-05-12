@@ -6,12 +6,14 @@ import { ExternalLink, Github } from "lucide-react";
 import { CaseStudyModal } from "./CaseStudyModal";
 import { ProjectCard } from "./projects/ProjectCard";
 import { projectsData } from "./projects/projectsData";
+import { useBreakpoint } from "@/hooks/use-mobile";
 
 const categories = ["All", "Node.js", "TypeScript", "Backend"];
 
 export function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [visibleProjects, setVisibleProjects] = useState(3);
+  const { isMobile } = useBreakpoint();
 
   // Modal state
   const [modalProject, setModalProject] = useState<null | typeof projectsData[0]>(null);
@@ -63,6 +65,7 @@ export function Projects() {
               key={project.id} 
               project={project} 
               onClick={() => setModalProject(project)} 
+              isMobile={isMobile}
             />
           ))}
         </div>

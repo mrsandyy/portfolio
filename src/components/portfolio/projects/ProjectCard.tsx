@@ -14,9 +14,10 @@ interface ProjectCardProps {
     featured: boolean;
   };
   onClick: () => void;
+  isMobile?: boolean;
 }
 
-export function ProjectCard({ project, onClick }: ProjectCardProps) {
+export function ProjectCard({ project, onClick, isMobile }: ProjectCardProps) {
   const { title, description, image, tags, demoLink, repoLink } = project;
 
   return (
@@ -57,7 +58,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
           Backend Role: Lead Architect & API Developer
         </p>
         <p className="text-muted-foreground mb-4 flex-1">{description}</p>
-        <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3 mt-auto pt-3 items-center justify-between">
+        <div className={`flex ${isMobile ? 'flex-col' : 'flex-row'} justify-between items-start sm:items-center gap-3 mt-auto pt-3`}>
           <div className="flex gap-3">
             <a
               href={demoLink}
@@ -79,8 +80,8 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
             </a>
           </div>
           <button
-            className="bg-portfolio-700 text-white px-3 py-1 rounded-lg text-xs font-semibold shadow hover:bg-portfolio-900 transition whitespace-nowrap"
-            onClick={e => { e.stopPropagation(); onClick(); }}
+            className={`bg-portfolio-700 text-white px-3 py-1 rounded-lg text-xs font-semibold shadow hover:bg-portfolio-900 transition whitespace-nowrap ${isMobile ? 'w-full text-center' : ''}`}
+            onClick={(e) => { e.stopPropagation(); onClick(); }}
           >
             In-Depth Case Study
           </button>
