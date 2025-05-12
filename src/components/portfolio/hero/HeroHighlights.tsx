@@ -10,7 +10,7 @@ const highlights = [
 ];
 
 export function HeroHighlights() {
-  // Always call hooks unconditionally at the top level
+  // Always call hooks at the top level
   const { isMobile, isMounted } = useBreakpoint();
 
   // Simplified animations for better performance
@@ -33,6 +33,9 @@ export function HeroHighlights() {
     }
   };
 
+  // Compute hover scale only once
+  const hoverScale = isMounted && !isMobile ? 1.03 : 1;
+
   return (
     <motion.div 
       variants={containerVariants}
@@ -45,7 +48,7 @@ export function HeroHighlights() {
           key={h.label} 
           className="flex flex-col items-center p-3 md:p-4 rounded-xl bg-white border-2 border-portfolio-200 shadow-md hover:shadow-lg transition-all duration-300"
           variants={itemVariants}
-          whileHover={{ scale: isMounted && !isMobile ? 1.03 : 1 }}
+          whileHover={{ scale: hoverScale }}
         >
           <span className="text-xs uppercase font-semibold text-portfolio-700 tracking-wide text-center mb-1">
             {h.label}

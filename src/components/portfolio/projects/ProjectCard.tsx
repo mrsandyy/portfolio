@@ -58,7 +58,7 @@ export function ProjectCard({ project, onClick, isMobile }: ProjectCardProps) {
           Backend Role: Lead Architect & API Developer
         </p>
         <p className="text-muted-foreground mb-4 flex-1">{description}</p>
-        <div className={`flex ${isMobile ? 'flex-col' : 'flex-row'} justify-between items-start sm:items-center gap-3 mt-auto pt-3`}>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mt-auto pt-3">
           <div className="flex gap-3">
             <a
               href={demoLink}
@@ -80,7 +80,7 @@ export function ProjectCard({ project, onClick, isMobile }: ProjectCardProps) {
             </a>
           </div>
           <button
-            className={`bg-portfolio-700 text-white px-3 py-1 rounded-lg text-xs font-semibold shadow hover:bg-portfolio-900 transition whitespace-nowrap ${isMobile ? 'w-full text-center' : ''}`}
+            className="bg-portfolio-700 text-white px-3 py-1 rounded-lg text-xs font-semibold shadow hover:bg-portfolio-900 transition w-full sm:w-auto text-center"
             onClick={(e) => { e.stopPropagation(); onClick(); }}
           >
             In-Depth Case Study
