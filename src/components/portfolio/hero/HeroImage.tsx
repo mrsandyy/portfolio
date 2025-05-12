@@ -41,7 +41,7 @@ export function HeroImage() {
       <div className="relative">
         <div className="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl">
           <img 
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            src="MrSandy-4.jpg"
             alt="Sandeep Vishnoi"
             className="w-full h-full object-cover"
             loading="eager"
