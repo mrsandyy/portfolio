@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Database, Server, Cpu, Terminal } from "lucide-react";
+import { Database, Server, Cpu, Terminal, Braces } from "lucide-react";
 import { HeroImage } from "./hero/HeroImage";
 import { HeroActions } from "./hero/HeroActions";
 import { HeroHighlights } from "./hero/HeroHighlights";
@@ -8,8 +8,9 @@ import { HeroHighlights } from "./hero/HeroHighlights";
 const coreSkills = [
   { label: "Node.js", icon: <Server className="h-5 w-5 text-portfolio-700" /> },
   { label: "TypeScript", icon: <Terminal className="h-5 w-5 text-portfolio-700" /> },
-  { label: "SQL / MongoDB", icon: <Database className="h-5 w-5 text-portfolio-700" /> },
+  { label: "Python", icon: <Braces className="h-5 w-5 text-portfolio-700" /> },
   { label: "API Design", icon: <Cpu className="h-5 w-5 text-portfolio-700" /> },
+  { label: "SQL / MongoDB", icon: <Database className="h-5 w-5 text-portfolio-700" /> },
   { label: "Testing (Jest)", icon: <Terminal className="h-5 w-5 text-portfolio-700" /> },
   { label: "Cloud/Deploy", icon: <Server className="h-5 w-5 text-portfolio-700" /> },
 ];
@@ -28,10 +29,10 @@ export function Hero() {
               className="mb-3 flex items-center gap-3"
             >
               <span className="block px-3 py-1 rounded-lg font-bold text-white bg-portfolio-700 shadow-md text-sm tracking-wide">
-                Back-End Engineer
+                2+ Years Exp
               </span>
               <span className="block px-3 py-1 rounded-lg bg-portfolio-200 text-portfolio-700 font-semibold shadow-sm">
-                Available Now
+                Open to Work
               </span>
             </motion.div>
             
@@ -68,7 +69,7 @@ export function Hero() {
                   className="flex items-center gap-2 bg-portfolio-200/80 text-portfolio-900 px-3 py-1 rounded-lg font-semibold shadow-sm text-sm hover:bg-portfolio-300 hover:-translate-y-1 border border-portfolio-100 transition-all"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                  transition={{ duration: 0.1, delay: 0.1 }}
                   whileHover={{ scale: 1.05 }}
                 >
                   {skill.icon} {skill.label}

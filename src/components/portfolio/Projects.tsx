@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -6,22 +5,32 @@ import { CaseStudyModal } from "./CaseStudyModal";
 import { ProjectCard } from "./projects/ProjectCard";
 import { projectsData } from "./projects/projectsData";
 import { useBreakpoint } from "@/hooks/use-mobile";
+import { Project, ProjectCategory, ProjectsConfig } from "./projects/types";
 
-const categories = ["All", "Node.js", "TypeScript", "Backend"];
+const projectsConfig: ProjectsConfig = {
+  categories: ["All", "Node.js", "TypeScript", "Backend"],
+  initialVisibleCount: 3,
+  loadMoreCount: 3,
+};
 
 export function Projects() {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [visibleProjects, setVisibleProjects] = useState(3);
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
+  const [visibleProjects, setVisibleProjects] = useState(projectsConfig.initialVisibleCount);
   const { isMobile } = useBreakpoint();
 
   // Modal state
-  const [modalProject, setModalProject] = useState<null | typeof projectsData[0]>(null);
+  const [modalProject, setModalProject] = useState<Project | null>(null);
 
   // Filter projects based on active category
   const filteredProjects =
     activeCategory === "All"
       ? projectsData
-      : projectsData.filter((project) => project.tags.includes(activeCategory) || (activeCategory === "Backend"));
+      : projectsData.filter((project) => 
+          project.tags.includes(activeCategory) || 
+          (activeCategory === "Backend" && project.tags.some(tag => 
+            ["Node.js", "PostgreSQL", "Redis", "Docker"].includes(tag)
+          ))
+        );
 
   return (
     <section id="projects" className="py-20 bg-muted/30">
@@ -40,7 +49,7 @@ export function Projects() {
         
         {/* Project Categories */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {categories.map((category) => (
+          {projectsConfig.categories.map((category) => (
             <Button
               key={category}
               variant={activeCategory === category ? "default" : "outline"}
@@ -72,7 +81,7 @@ export function Projects() {
         {filteredProjects.length > visibleProjects && (
           <div className="mt-10 text-center">
             <Button
-              onClick={() => setVisibleProjects((prev) => prev + 3)}
+              onClick={() => setVisibleProjects((prev) => prev + projectsConfig.loadMoreCount)}
               variant="outline"
               className="border-portfolio-600 text-portfolio-600 hover:bg-portfolio-50"
             >

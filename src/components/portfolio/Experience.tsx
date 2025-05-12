@@ -6,38 +6,38 @@ import { Briefcase, GraduationCap } from "lucide-react";
 const workExperience = [
   {
     id: 1,
-    role: "Senior Frontend Developer",
-    company: "Tech Innovations Inc.",
-    duration: "2021 - Present",
-    description: "Led cross-functional teams to deliver robust React applications for SaaS clients. Owned component design, best practices, and mentored new engineers.",
+    role: "Full Stack Developer & Project Lead",
+    company: "Freelance / Inorc Agency",
+    duration: "2022 - Present",
+    description: "Led end-to-end development of web applications for clients across travel, education, fitness, and SaaS domains. Managed deployments, backend integrations, and frontend architecture.",
     achievements: [
-      "Reduced load times 40% via code splitting/lazy loading",
-      "Introduced developer onboarding guides for faster ramp-up",
-      "Facilitated bi-weekly code reviews and demo sessions"
+      "Built and deployed 10+ full-stack applications using Next.js, Node.js, PostgreSQL, and Docker",
+      "Created an AI-powered pricing assistant and dynamic CMS for Inorc agency website",
+      "Delivered SEO-optimized, mobile-first websites with performance scores >90 on Lighthouse"
     ]
   },
   {
     id: 2,
-    role: "Web Developer",
-    company: "Digital Solutions Co.",
-    duration: "2018 - 2021",
-    description: "Member of a remote scrum team building scalable client apps. Focused on collaborating with product/design for clean UX and reusable code.",
+    role: "Software Developer (College & Open Source)",
+    company: "SS Jain Subodh PG College / Self-initiated",
+    duration: "2021 - Present",
+    description: "Contributed to academic and departmental tools including Subodh Notifier and StudyBits. Focused on solving real-world problems using modern tech stacks.",
     achievements: [
-      "Launched 15+ web apps, maintained above 95% satisfaction",
-      "Improved team delivery via automated testing (Jest)",
-      "Mentored 2 junior devs into full-time engineers"
+      "Built Subodh Notifier with cron jobs and Dockerized backend to automate student alerts",
+      "Developed StudyBits – a Markdown-powered notes platform tailored to BCA syllabus",
+      "Improved internal tooling by creating automation scripts for college submissions"
     ]
   },
   {
     id: 3,
-    role: "Junior Developer",
-    company: "StartUp Labs",
-    duration: "2016 - 2018",
-    description: "Assisted with bug fixes and delivered features for MVP launches. Learned best practices from senior teammates and contributed actively in sprints.",
+    role: "Automation & AI Enthusiast",
+    company: "Independent Projects",
+    duration: "2021 - Present",
+    description: "Explored AI, web automation, and computer vision through hands-on personal projects aimed at practical productivity and problem-solving.",
     achievements: [
-      "Built reusable UI library components for new products",
-      "Documented and improved internal dev wiki",
-      "Consistently delivered sprint stories on time"
+      "Built CareVision – an AI camera system to help elderly track personal items & reminders",
+      "Developed web automation bots for Instagram, Snapchat, and Spotify using Python",
+      "Created InspireBot – a Discord bot that sends motivational quotes using Node.js"
     ]
   }
 ];
@@ -45,17 +45,17 @@ const workExperience = [
 const education = [
   {
     id: 1,
-    degree: "Master of Computer Science",
-    institution: "University of Technology",
-    duration: "2014 - 2016",
-    description: "Specialized in web technologies, group projects, and agile methodologies. Graduated with honors."
+    degree: "Bachelor of Computer Applications (BCA)",
+    institution: "SS Jain Subodh PG College, Jaipur",
+    duration: "2022 - Present",
+    description: "Focused on software development, cybersecurity, computer graphics, and web technologies. Built real-world academic tools like Subodh Notifier & StudyBits while exploring automation, SaaS, and AI-driven solutions."
   },
   {
     id: 2,
-    degree: "BSc Computer Science",
-    institution: "State University",
-    duration: "2010 - 2014",
-    description: "Learned fundamentals, contributed to hackathons and team software competitions."
+    degree: "Higher Secondary Education",
+    institution: "Affiliated Institution under Rajasthan Board",
+    duration: "2019 - 2021",
+    description: "Studied foundational computer science, mathematics, and logic building. Developed an early interest in programming and automation through personal projects."
   }
 ];
 

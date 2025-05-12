@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import { useBreakpoint } from "@/hooks/use-mobile";
 
 const highlights = [
-  { label: "Experience", value: "5+ yrs", desc: "Professional Engineering" },
-  { label: "Systems Built", value: "30+", desc: "Production Projects" },
+  { label: "Experience", value: "2+ yrs", desc: "Professional Engineering" },
+  { label: "Systems Built", value: "15+", desc: "Production Projects" },
   { label: "Team Projects", value: "10+", desc: "Collaborative Dev" },
-  { label: "Stack", value: "Node, TS, SQL", desc: "Modern Technologies" },
+  { label: "Stack", value: "Node, TS, Python", desc: "Modern Technologies" },
 ];
 
 export function HeroHighlights() {
@@ -53,7 +53,7 @@ export function HeroHighlights() {
           <span className="text-xs uppercase font-semibold text-portfolio-700 tracking-wide text-center">
             {h.label}
           </span>
-          <span className="text-xl sm:text-2xl md:text-3xl font-bold text-portfolio-800 leading-none my-1">
+          <span className="text-xl sm:text-2xl md:text-3xl font-bold text-portfolio-800 leading-none my-1 text-center">
             {h.value}
           </span>
           <span className="text-xs md:text-sm text-portfolio-600 text-center">

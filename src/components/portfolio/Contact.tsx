@@ -64,10 +64,10 @@ export function Contact() {
                   <div>
                     <h5 className="text-sm font-medium text-muted-foreground mb-1">Email</h5>
                     <a
-                      href="mailto:contact@johndoe.com"
+                      href="mailto:contact@mrsandy.in"
                       className="text-foreground hover:text-portfolio-600 transition-colors"
                     >
-                      contact@johndoe.com
+                      contact@mrsandy.in
                     </a>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ export function Contact() {
                       href="tel:+11234567890"
                       className="text-foreground hover:text-portfolio-600 transition-colors"
                     >
-                      +1 (123) 456-7890
+                      [Redacted due to Privacy]
                     </a>
                   </div>
                 </div>
@@ -92,12 +92,12 @@ export function Contact() {
                   <div>
                     <h5 className="text-sm font-medium text-muted-foreground mb-1">LinkedIn</h5>
                     <a
-                      href="https://linkedin.com/in/johndoe"
+                      href="https://linkedin.com/in/sandeepvishnoi"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-foreground hover:text-portfolio-600 transition-colors"
                     >
-                      linkedin.com/in/johndoe
+                      linkedin.com/in/sandeepvishnoi
                     </a>
                   </div>
                 </div>
@@ -108,12 +108,12 @@ export function Contact() {
                   <div>
                     <h5 className="text-sm font-medium text-muted-foreground mb-1">GitHub</h5>
                     <a
-                      href="https://github.com/johndoe"
+                      href="https://github.com/mrsandyy"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-foreground hover:text-portfolio-600 transition-colors"
                     >
-                      github.com/johndoe
+                      github.com/mrsandyy
                     </a>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ export function Contact() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Project inquiry"
+                    placeholder="Job Offer for [Role]"
                     required
                     className="border-border focus-visible:ring-portfolio-600"
                   />
@@ -196,7 +196,7 @@ export function Contact() {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Hello, I'd like to discuss a project..."
+                    placeholder="Hello, I'd like to discuss a job offer..."
                     required
                     rows={6}
                     className="resize-none border-border focus-visible:ring-portfolio-600"

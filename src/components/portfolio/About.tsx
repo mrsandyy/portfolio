@@ -61,15 +61,15 @@ export function About() {
             <h3 className="text-xl font-bold text-portfolio-700 mb-2">In Numbers</h3>
             <div className="w-full flex flex-wrap justify-center gap-7">
               <div className="flex flex-col items-center gap-1">
-                <span className="text-4xl font-bold text-portfolio-700">30+</span>
+                <span className="text-4xl font-bold text-portfolio-700">20+</span>
                 <span className="text-base text-portfolio-800">Production Systems</span>
               </div>
               <div className="flex flex-col items-center gap-1">
-                <span className="text-4xl font-bold text-portfolio-700">5+ yrs</span>
+                <span className="text-4xl font-bold text-portfolio-700">2+ yrs</span>
                 <span className="text-base text-portfolio-800">Backend Exp.</span>
               </div>
               <div className="flex flex-col items-center gap-1">
-                <span className="text-4xl font-bold text-portfolio-700">200k+</span>
+                <span className="text-4xl font-bold text-portfolio-700">10k+</span>
                 <span className="text-base text-portfolio-800">Users Served</span>
               </div>
               <div className="flex flex-col items-center gap-1">

@@ -15,9 +15,9 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-8">
           {/* About */}
           <div className="space-y-4">
-            <h2 className="text-xl font-bold text-portfolio-700">John Doe</h2>
+            <h2 className="text-xl font-bold text-portfolio-700">Sandeep Vishnoi</h2>
             <p className="text-muted-foreground">
-              Web developer with a focus on team impact and reliable delivery. Open to new opportunities and relocation.
+              Backend Engineer with a focus on team impact and reliable delivery. Open to new opportunities and relocation.
             </p>
             <a
               href="/resume.pdf"
@@ -65,28 +65,28 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Contact</h3>
             <ul className="space-y-2">
-              <li className="text-muted-foreground">San Francisco, CA</li>
+              <li className="text-muted-foreground">Jaipur, Rajasthan, IN</li>
               <li>
                 <a
-                  href="mailto:contact@johndoe.com"
+                  href="mailto:contact@mrsandy.in"
                   className="text-muted-foreground hover:text-portfolio-600 transition-colors"
                 >
-                  contact@johndoe.com
+                  contact@mrsandy.in
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+11234567890"
+                  href="#"
                   className="text-muted-foreground hover:text-portfolio-600 transition-colors"
                 >
-                  +1 (123) 456-7890
+                  [Redacted due to Privacy]
                 </a>
               </li>
             </ul>
             {/* Social Links */}
             <div className="flex gap-4 pt-2">
               <a
-                href="https://linkedin.com/in/johndoe"
+                href="https://linkedin.com/in/sandeepvishnoi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-portfolio-100 rounded-full hover:bg-portfolio-200 transition-colors"
@@ -95,7 +95,7 @@ export function Footer() {
                 <Linkedin className="h-4 w-4 text-portfolio-600" />
               </a>
               <a
-                href="https://github.com/johndoe"
+                href="https://github.com/mrsandyy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-portfolio-100 rounded-full hover:bg-portfolio-200 transition-colors"
@@ -117,7 +117,7 @@ export function Footer() {
         </div>
         <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © {new Date().getFullYear()} John Doe. All rights reserved.
+            © {new Date().getFullYear()} Mr Sandy. All rights reserved.
           </p>
           <button
             onClick={scrollToTop}

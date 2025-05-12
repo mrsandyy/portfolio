@@ -8,7 +8,7 @@ export function Loader() {
     // Simulate loading time and then hide loader
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
     
     return () => clearTimeout(timer);
   }, []);
