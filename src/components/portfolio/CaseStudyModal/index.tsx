@@ -32,26 +32,31 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
     }
   }), []);
   
-  // Render different components based on device type, but ensure we never return early
-  // before all hooks are called
-  if (!project) {
-    return null;
-  }
-  
-  if (isMobile) {
+  // Handle the case when no project is available
+  // Instead of an early return, we'll render null conditionally
+  const renderContent = () => {
+    if (!project) {
+      return null;
+    }
+    
+    if (isMobile) {
+      return (
+        <Drawer open={open} onOpenChange={onOpenChange}>
+          <CaseStudyMobileDrawer project={project} />
+        </Drawer>
+      );
+    } 
+    
     return (
-      <Drawer open={open} onOpenChange={onOpenChange}>
-        <CaseStudyMobileDrawer project={project} />
-      </Drawer>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <CaseStudyDesktopDialog 
+          project={project} 
+          animations={animations}
+        />
+      </Dialog>
     );
-  } 
+  };
   
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <CaseStudyDesktopDialog 
-        project={project} 
-        animations={animations}
-      />
-    </Dialog>
-  );
+  // This ensures that hooks are always called in the same order
+  return renderContent();
 }
