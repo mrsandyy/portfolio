@@ -14,7 +14,7 @@ interface CaseStudyModalProps {
 }
 
 export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalProps) {
-  // Always call hooks at the top level - before any early returns or conditions
+  // Always call hooks at the top level
   const { isMobile } = useBreakpoint();
   
   // Create animations once to avoid recreating on every render
@@ -32,10 +32,12 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
     }
   }), []);
   
-  // Early return if no project (after hooks are called)
-  if (!project) return null;
+  // Render different components based on device type, but ensure we never return early
+  // before all hooks are called
+  if (!project) {
+    return null;
+  }
   
-  // For mobile devices
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
@@ -44,7 +46,6 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
     );
   } 
   
-  // For desktop
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <CaseStudyDesktopDialog 

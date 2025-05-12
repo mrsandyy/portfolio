@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github } from "lucide-react";
 import { CaseStudyModal } from "./CaseStudyModal";
 import { ProjectCard } from "./projects/ProjectCard";
 import { projectsData } from "./projects/projectsData";

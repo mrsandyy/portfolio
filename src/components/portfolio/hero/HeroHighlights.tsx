@@ -33,7 +33,7 @@ export function HeroHighlights() {
     }
   };
 
-  // Compute hover scale only once
+  // Always compute this value, even if we don't use it in some cases
   const hoverScale = isMounted && !isMobile ? 1.03 : 1;
 
   return (

@@ -1,9 +1,10 @@
 
 import { motion } from "framer-motion";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useBreakpoint } from "@/hooks/use-mobile";
 
 export function HeroImage() {
-  const isMobile = useIsMobile();
+  // Use the more reliable useBreakpoint hook
+  const { isMobile } = useBreakpoint();
 
   // Simpler animations that work well across devices
   const decorationVariants = {
@@ -45,21 +46,17 @@ export function HeroImage() {
         </div>
         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-portfolio-500/20 to-transparent"></div>
         
-        {/* Only show decorative elements on non-mobile devices */}
-        {!isMobile && (
-          <>
-            <motion.div 
-              className="absolute -bottom-2 -right-2 w-10 h-10 bg-portfolio-500 rounded-full"
-              variants={decorationVariants}
-              animate="pulse"
-            ></motion.div>
-            <motion.div 
-              className="absolute -top-2 -left-2 w-6 h-6 bg-portfolio-700 rounded-full"
-              variants={decorationVariants}
-              animate="float"
-            ></motion.div>
-          </>
-        )}
+        {/* Decorative elements - always render but with conditional styling */}
+        <motion.div 
+          className={`absolute -bottom-2 -right-2 w-10 h-10 bg-portfolio-500 rounded-full ${isMobile ? 'opacity-0' : 'opacity-100'}`}
+          variants={decorationVariants}
+          animate="pulse"
+        ></motion.div>
+        <motion.div 
+          className={`absolute -top-2 -left-2 w-6 h-6 bg-portfolio-700 rounded-full ${isMobile ? 'opacity-0' : 'opacity-100'}`}
+          variants={decorationVariants}
+          animate="float"
+        ></motion.div>
       </div>
     </motion.div>
   );
