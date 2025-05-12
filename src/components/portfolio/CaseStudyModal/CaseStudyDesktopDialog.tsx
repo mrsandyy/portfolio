@@ -1,6 +1,5 @@
-
 import React from "react";
-import { DialogContent, DialogHeader, DialogDescription } from "@/components/ui/dialog";
+import { DialogContent, DialogHeader, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Github, ExternalLink, Database, Server, Cpu, Code, Terminal, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -28,6 +27,7 @@ export function CaseStudyDesktopDialog({ project, animations }: CaseStudyDesktop
 
   return (
     <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-xl bg-gradient-to-br from-portfolio-50 via-white to-portfolio-50">
+      <DialogTitle className="sr-only">Project Case Study: {title}</DialogTitle>
       <div className="grid md:grid-cols-5 gap-0">
         {/* Left sidebar with project info */}
         <motion.div 
@@ -96,11 +96,9 @@ export function CaseStudyDesktopDialog({ project, animations }: CaseStudyDesktop
           variants={animations.stagger}
         >
           <DialogHeader className="mb-5 md:mb-6">
+            <DialogTitle className="text-xl md:text-2xl font-bold text-portfolio-800">{title}</DialogTitle>
             <motion.div variants={animations.fadeInUp}>
               <div className="flex items-start md:items-center justify-between mb-2 flex-col md:flex-row gap-2 md:gap-0">
-                <DialogHeader className="p-0 space-y-0">
-                  <h2 className="text-xl md:text-2xl font-bold text-portfolio-800">{title}</h2>
-                </DialogHeader>
                 <span className="text-xs font-medium bg-portfolio-100 text-portfolio-700 px-2 py-1 rounded-full">Back-End Project</span>
               </div>
               <DialogDescription className="text-base md:text-lg font-medium text-portfolio-700">

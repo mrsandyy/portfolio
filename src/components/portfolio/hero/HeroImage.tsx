@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { useBreakpoint } from "@/hooks/use-mobile";
 
@@ -6,24 +5,28 @@ export function HeroImage() {
   // Use the more reliable useBreakpoint hook
   const { isMobile } = useBreakpoint();
 
-  // Simpler animations that work well across devices
+  // Optimized animations with better timing and smoother transitions
   const decorationVariants = {
     pulse: {
       scale: [1, 1.05, 1],
+      opacity: [0.4, 0.6, 0.4],
       transition: {
         duration: 4,
         repeat: Infinity,
         repeatType: "loop" as const,
-        ease: "easeInOut"
+        ease: [0.4, 0, 0.6, 1],
+        times: [0, 0.5, 1]
       }
     },
     float: {
       y: [0, -10, 0],
+      x: [0, 3, 0],
       transition: {
         duration: 6,
         repeat: Infinity,
         repeatType: "loop" as const,
-        ease: "easeInOut"
+        ease: [0.4, 0, 0.6, 1],
+        times: [0, 0.5, 1]
       }
     }
   };
@@ -46,19 +49,27 @@ export function HeroImage() {
         </div>
         <div className="absolute inset-0 rounded-full bg-gradient-to-br from-portfolio-500/20 to-transparent"></div>
         
-        {/* Always render decorative elements with conditional styling */}
+        {/* Minimal decorative elements */}
         <motion.div 
-          className="absolute -bottom-2 -right-2 w-10 h-10 bg-portfolio-500 rounded-full"
-          style={{ opacity: isMobile ? 0 : 1 }}
+          className="absolute -bottom-2 -right-2 w-10 h-10 bg-portfolio-500/30 rounded-full"
+          style={{ 
+            opacity: isMobile ? 0 : 1,
+            filter: "blur(1px)",
+            mixBlendMode: "multiply"
+          }}
           variants={decorationVariants}
           animate="pulse"
-        ></motion.div>
+        />
         <motion.div 
-          className="absolute -top-2 -left-2 w-6 h-6 bg-portfolio-700 rounded-full"
-          style={{ opacity: isMobile ? 0 : 1 }}
+          className="absolute -top-2 -left-2 w-6 h-6 bg-portfolio-700/30 rounded-full"
+          style={{ 
+            opacity: isMobile ? 0 : 1,
+            filter: "blur(1px)",
+            mixBlendMode: "multiply"
+          }}
           variants={decorationVariants}
           animate="float"
-        ></motion.div>
+        />
       </div>
     </motion.div>
   );

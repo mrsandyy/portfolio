@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useMemo } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogDescription } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerHeader, DrawerDescription } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -7,6 +6,8 @@ import { Github, ExternalLink, Database, Server, Cpu, Code, Terminal, CheckCircl
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useBreakpoint } from "@/hooks/use-mobile";
+import { ProjectInfo } from "./CaseStudyModal/ProjectInfo";
+import { CaseStudyContent } from "./CaseStudyModal/CaseStudyContent";
 
 interface CaseStudyModalProps {
   open: boolean;
@@ -28,93 +29,44 @@ interface CaseStudyModalProps {
 }
 
 export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalProps) {
-  // Always call hooks at the top level - before any early returns or conditions
   const { isMobile } = useBreakpoint();
-  
-  // Create animations once to avoid recreating on every render
-  const animations = React.useMemo(() => ({
+
+  // Memoize animations to prevent recreating on every render
+  const animations = useMemo(() => ({
     fadeInUp: {
-      hidden: { opacity: 0, y: 20 },
-      visible: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
     },
     stagger: {
-      visible: {
-        transition: {
-          staggerChildren: 0.1
-        }
+    visible: {
+      transition: {
+        staggerChildren: 0.1
       }
+    }
     }
   }), []);
   
-  // Early return if no project (after hooks are called)
   if (!project) return null;
   
-  // Destructure the project properties for cleaner code
   const { title, description, image, demoLink, repoLink, caseStudy, tags } = project;
 
-  // For mobile devices
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent className="px-0 py-0 overflow-hidden rounded-t-xl max-h-[85vh]">
           <ScrollArea className="max-h-[85vh] h-[85vh] overflow-y-auto">
             <div className="flex flex-col">
-              {/* Top section with project info */}
-              <div className="bg-gradient-to-br from-portfolio-700 to-portfolio-600 text-white p-4 md:p-5">
-                <div className="mb-4">
-                  <div className="bg-white p-1 rounded-lg shadow-lg">
-                    <img 
-                      src={image} 
-                      alt={title} 
-                      className="w-full object-cover rounded-md" 
-                      style={{ aspectRatio: "16/9", objectFit: "cover" }}
-                    />
-                  </div>
-                </div>
-                
-                <div className="bg-portfolio-800/40 rounded-lg p-4 backdrop-blur-sm mb-4">
-                  <h3 className="text-lg font-bold mb-2 text-white">{title}</h3>
-                  <p className="text-xs text-portfolio-100">{description}</p>
-                </div>
-                
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold mb-2 text-portfolio-200">Tech Stack</h4>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {caseStudy.mainStack.map(stack => (
-                      <span 
-                        key={stack} 
-                        className="flex items-center gap-1 bg-white/10 px-2 py-1 rounded-full text-xs text-white font-medium border border-white/20"
-                      >
-                        {stack === "Node.js" && <Server className="h-3 w-3" />}
-                        {stack === "TypeScript" && <Terminal className="h-3 w-3" />}
-                        {stack === "PostgreSQL" && <Database className="h-3 w-3" />}
-                        {stack === "GraphQL" && <Code className="h-3 w-3" />}
-                        {stack === "WebSockets" && <Code className="h-3 w-3" />}
-                        {stack === "Redis" && <Database className="h-3 w-3" />}
-                        {stack === "Docker" && <Server className="h-3 w-3" />}
-                        {stack === "Stripe" && <Code className="h-3 w-3" />}
-                        {stack}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="flex flex-col space-y-2 w-full">
-                  <a href={demoLink} target="_blank" rel="noopener noreferrer" className="w-full">
-                    <Button variant="outline" size="sm" className="w-full bg-white text-portfolio-700 hover:bg-portfolio-100 hover:text-portfolio-800 transition-all border-none">
-                      <ExternalLink className="h-4 w-4 mr-1" /> Live Demo
-                    </Button>
-                  </a>
-                  <a href={repoLink} target="_blank" rel="noopener noreferrer" className="w-full">
-                    <Button variant="outline" size="sm" className="w-full bg-transparent text-white border-white/50 hover:bg-white/10 transition-all">
-                      <Github className="h-4 w-4 mr-1" /> View Code
-                    </Button>
-                  </a>
-                </div>
-              </div>
+              <ProjectInfo
+                title={title}
+                description={description}
+                image={image}
+                demoLink={demoLink}
+                repoLink={repoLink}
+                caseStudy={caseStudy}
+                animations={animations}
+              />
               
-              {/* Bottom section with details */}
-              <div className="px-4 py-6 pb-24"> {/* Add extra padding at bottom */}
+              <div className="px-4 py-6 pb-24">
                 <DrawerHeader className="mb-5 text-left px-0">
                   <div className="flex items-start justify-between mb-2 flex-col gap-2">
                     <h2 className="text-xl font-bold text-portfolio-800">{title}</h2>
@@ -125,48 +77,11 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
                   </DrawerDescription>
                 </DrawerHeader>
                 
-                <div className="space-y-5">
-                  <div className="bg-portfolio-50 p-4 rounded-lg border-l-4 border-portfolio-600">
-                    <h3 className="font-bold text-portfolio-800 mb-2 flex items-center">
-                      <Code className="h-5 w-5 mr-2 text-portfolio-600" /> Technical Challenge
-                    </h3>
-                    <p className="text-portfolio-700 text-sm">{caseStudy.challenges}</p>
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-bold text-portfolio-800 mb-3 flex items-center">
-                      <Server className="h-5 w-5 mr-2 text-portfolio-600" /> Back-End Highlights
-                    </h3>
-                    <ul className="space-y-2 pl-2">
-                      {caseStudy.backendHighlights.map((point, i) => (
-                        <li 
-                          key={i} 
-                          className="flex gap-2 text-portfolio-700"
-                        >
-                          <CheckCircle className="h-5 w-5 text-portfolio-600 flex-shrink-0 mt-0.5" />
-                          <span className="text-xs md:text-sm">{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className="pt-2 mt-4 pb-6">
-                    <div className="flex justify-between items-center">
-                      <h3 className="font-bold text-portfolio-800">Key Achievements</h3>
-                      <span className="text-xs bg-portfolio-200 text-portfolio-700 px-2 py-1 rounded-full">Lead Developer Role</span>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 mt-3">
-                      <div className="bg-white p-3 rounded-lg border border-portfolio-200 shadow-sm">
-                        <h4 className="text-xs font-semibold text-portfolio-600">Performance</h4>
-                        <p className="text-sm font-bold text-portfolio-800">50% Faster API Response</p>
-                      </div>
-                      <div className="bg-white p-3 rounded-lg border border-portfolio-200 shadow-sm">
-                        <h4 className="text-xs font-semibold text-portfolio-600">Scale</h4>
-                        <p className="text-sm font-bold text-portfolio-800">10K+ Concurrent Users</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <CaseStudyContent
+                  title={title}
+                  caseStudy={caseStudy}
+                  animations={animations}
+                />
               </div>
             </div>
           </ScrollArea>
@@ -174,141 +89,40 @@ export function CaseStudyModal({ open, onOpenChange, project }: CaseStudyModalPr
       </Drawer>
     );
   } 
-  
-  // For desktop
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-xl bg-gradient-to-br from-portfolio-50 via-white to-portfolio-50">
         <div className="grid md:grid-cols-5 gap-0">
-          {/* Left sidebar with project info */}
-          <motion.div 
-            className="md:col-span-2 p-5 md:p-6 bg-gradient-to-br from-portfolio-700 to-portfolio-600 text-white flex flex-col"
-            initial="hidden"
-            animate="visible"
-            variants={animations.stagger}
-          >
-            <motion.div variants={animations.fadeInUp} className="mb-4">
-              <div className="bg-white p-1 rounded-lg shadow-lg">
-                <img 
-                  src={image} 
-                  alt={title} 
-                  className="w-full h-28 md:h-36 object-cover rounded-md" 
-                  style={{ aspectRatio: "16/9", objectFit: "cover" }}
-                />
-              </div>
-            </motion.div>
-            
-            <motion.div variants={animations.fadeInUp} className="bg-portfolio-800/40 rounded-lg p-4 backdrop-blur-sm mb-4">
-              <h3 className="text-lg md:text-xl font-bold mb-2 text-white">{title}</h3>
-              <p className="text-xs md:text-sm text-portfolio-100">{description}</p>
-            </motion.div>
-            
-            <motion.div variants={animations.fadeInUp} className="mb-4">
-              <h4 className="text-sm font-semibold mb-2 text-portfolio-200">Tech Stack</h4>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {caseStudy.mainStack.map(stack => (
-                  <span 
-                    key={stack} 
-                    className="flex items-center gap-1 bg-white/10 px-2 py-1 rounded-full text-xs text-white font-medium border border-white/20"
-                  >
-                    {stack === "Node.js" && <Server className="h-3 w-3" />}
-                    {stack === "TypeScript" && <Terminal className="h-3 w-3" />}
-                    {stack === "PostgreSQL" && <Database className="h-3 w-3" />}
-                    {stack === "GraphQL" && <Code className="h-3 w-3" />}
-                    {stack === "WebSockets" && <Code className="h-3 w-3" />}
-                    {stack === "Redis" && <Database className="h-3 w-3" />}
-                    {stack === "Docker" && <Server className="h-3 w-3" />}
-                    {stack === "Stripe" && <Code className="h-3 w-3" />}
-                    {stack}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-            
-            <motion.div variants={animations.fadeInUp} className="flex gap-3 mt-auto pt-4">
-              <a href={demoLink} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="sm" className="bg-white text-portfolio-700 hover:bg-portfolio-100 hover:text-portfolio-800 transition-all border-none">
-                  <ExternalLink className="h-4 w-4 mr-1" /> Live Demo
-                </Button>
-              </a>
-              <a href={repoLink} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="sm" className="bg-transparent text-white border-white/50 hover:bg-white/10 transition-all">
-                  <Github className="h-4 w-4 mr-1" /> View Code
-                </Button>
-              </a>
-            </motion.div>
-          </motion.div>
+          <ProjectInfo
+            title={title}
+            description={description}
+            image={image}
+            demoLink={demoLink}
+            repoLink={repoLink}
+            caseStudy={caseStudy}
+            animations={animations}
+          />
           
-          {/* Right content with details */}
-          <motion.div 
-            className="md:col-span-3 px-5 py-6 md:px-7 md:py-8"
-            initial="hidden"
-            animate="visible"
-            variants={animations.stagger}
-          >
+          <div className="md:col-span-3 px-5 py-6 md:px-7 md:py-8">
             <DialogHeader className="mb-5 md:mb-6">
-              <motion.div variants={animations.fadeInUp}>
-                <div className="flex items-start md:items-center justify-between mb-2 flex-col md:flex-row gap-2 md:gap-0">
-                  <DialogHeader className="p-0 space-y-0">
-                    <h2 className="text-xl md:text-2xl font-bold text-portfolio-800">{title}</h2>
-                  </DialogHeader>
+              <div className="flex items-start md:items-center justify-between mb-2 flex-col md:flex-row gap-2 md:gap-0">
+                <DialogHeader className="p-0 space-y-0">
+                  <h2 className="text-xl md:text-2xl font-bold text-portfolio-800">{title}</h2>
+                </DialogHeader>
                   <span className="text-xs font-medium bg-portfolio-100 text-portfolio-700 px-2 py-1 rounded-full">Back-End Project</span>
                 </div>
-                <DialogDescription className="text-base md:text-lg font-medium text-portfolio-700">
+              <DialogDescription className="text-base md:text-lg font-medium text-portfolio-700">
                   {caseStudy.headline}
                 </DialogDescription>
-              </motion.div>
             </DialogHeader>
             
-            <div className="space-y-5 md:space-y-6">
-              <motion.div variants={animations.fadeInUp} className="bg-portfolio-50 p-4 rounded-lg border-l-4 border-portfolio-600">
-                <h3 className="font-bold text-portfolio-800 mb-2 flex items-center">
-                  <Code className="h-5 w-5 mr-2 text-portfolio-600" /> Technical Challenge
-                </h3>
-                <p className="text-portfolio-700 text-sm">{caseStudy.challenges}</p>
-              </motion.div>
-              
-              <motion.div variants={animations.fadeInUp}>
-                <h3 className="font-bold text-portfolio-800 mb-3 flex items-center">
-                  <Server className="h-5 w-5 mr-2 text-portfolio-600" /> Back-End Highlights
-                </h3>
-                <motion.ul 
-                  className="space-y-2 md:space-y-3 pl-2"
-                  variants={animations.stagger}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  {caseStudy.backendHighlights.map((point, i) => (
-                    <motion.li 
-                      key={i} 
-                      className="flex gap-2 md:gap-3 text-portfolio-700"
-                      variants={animations.fadeInUp}
-                    >
-                      <CheckCircle className="h-5 w-5 text-portfolio-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-xs md:text-sm">{point}</span>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-              </motion.div>
-              
-              <motion.div variants={animations.fadeInUp} className="pt-2 mt-4">
-                <div className="flex justify-between items-center">
-                  <h3 className="font-bold text-portfolio-800">Key Achievements</h3>
-                  <span className="text-xs bg-portfolio-200 text-portfolio-700 px-2 py-1 rounded-full">Lead Developer Role</span>
-                </div>
-                <div className="grid grid-cols-2 gap-4 mt-3">
-                  <div className="bg-white p-3 rounded-lg border border-portfolio-200 shadow-sm">
-                    <h4 className="text-xs font-semibold text-portfolio-600">Performance</h4>
-                    <p className="text-sm font-bold text-portfolio-800">50% Faster API Response</p>
-                  </div>
-                  <div className="bg-white p-3 rounded-lg border border-portfolio-200 shadow-sm">
-                    <h4 className="text-xs font-semibold text-portfolio-600">Scale</h4>
-                    <p className="text-sm font-bold text-portfolio-800">10K+ Concurrent Users</p>
-                  </div>
-                </div>
-              </motion.div>
+            <CaseStudyContent
+              title={title}
+              caseStudy={caseStudy}
+              animations={animations}
+            />
             </div>
-          </motion.div>
         </div>
       </DialogContent>
     </Dialog>

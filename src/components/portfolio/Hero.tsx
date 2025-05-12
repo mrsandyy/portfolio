@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Database, Server, Cpu, Terminal } from "lucide-react";
@@ -37,13 +36,13 @@ export function Hero() {
             </motion.div>
             
             <motion.h1 
-              className="font-bold text-4xl sm:text-5xl text-portfolio-800 mb-4 text-center md:text-left leading-tight"
+              className="font-bold text-4xl sm:text-5xl text-portfolio-800 mb-4 text-center md:text-left leading-[1.2]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Sandeep Vishnoi
-              <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent block md:ml-3 md:inline-block">
+              <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent block md:inline-block mt-1 pb-1">
                 Backend Engineer
               </span>
             </motion.h1>
