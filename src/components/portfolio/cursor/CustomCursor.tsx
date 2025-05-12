@@ -8,11 +8,11 @@ export function CustomCursor() {
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const isMobile = useIsMobile();
-
-  // Don't show custom cursor on mobile
-  if (isMobile) return null;
-
+  
   useEffect(() => {
+    // Skip effect execution on mobile but still call the hook
+    if (isMobile) return;
+    
     // Helper function to check if the element or its parents have cursor:pointer
     const hasPointerCursor = (element: Element | null): boolean => {
       if (!element || element === document.documentElement) {
@@ -55,25 +55,28 @@ export function CustomCursor() {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isVisible]);
+  }, [isVisible, isMobile]);
 
   // Apply styles based on state
   const cursorClasses = `custom-cursor ${isPointer ? 'cursor-hover' : ''} ${isClicking ? 'cursor-click' : ''} ${isVisible ? 'opacity-100' : 'opacity-0'}`;
   
   const ringClasses = `cursor-ring ${isPointer ? 'ring-hover' : ''} ${isClicking ? 'ring-click' : ''} ${isVisible ? 'opacity-100' : 'opacity-0'}`;
 
+  // Always render the cursor elements, but conditionally add CSS to hide on mobile
   return (
     <>
       <div 
         className={cursorClasses}
         style={{ 
-          transform: `translate(${position.x}px, ${position.y}px)`
+          transform: `translate(${position.x}px, ${position.y}px)`,
+          display: isMobile ? 'none' : 'block'
         }}
       />
       <div 
         className={ringClasses}
         style={{ 
-          transform: `translate(${position.x}px, ${position.y}px)`
+          transform: `translate(${position.x}px, ${position.y}px)`,
+          display: isMobile ? 'none' : 'block'
         }}
       />
     </>
