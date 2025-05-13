@@ -7,13 +7,14 @@ export function CustomCursor() {
   const [isPointer, setIsPointer] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const { isMobile, isTablet } = useBreakpoint();
-  
-  // Don't render the custom cursor on touch devices
-  if (isMobile || isTablet) {
-    return null;
-  }
 
   useEffect(() => {
+
+    // Don't render the custom cursor on touch devices
+    if (isMobile || isTablet) {
+      return;
+    }
+
     const onMouseMove = (e: MouseEvent) => {
       const { clientX: x, clientY: y } = e;
       setPosition({ x, y });
