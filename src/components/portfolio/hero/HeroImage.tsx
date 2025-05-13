@@ -40,7 +40,7 @@ export function HeroImage() {
       transition={{ duration: 0.8, delay: 0.3 }}
     >
       <div className="relative">
-        <div className="w-48 h-48 md:w-56 md:h-56 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl">
+        <div className="w-48 h-48 md:w-72 md:h-72 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl">
           <img 
             src="MrSandy-4.jpg"
             alt="Sandeep Vishnoi"

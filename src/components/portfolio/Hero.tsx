@@ -22,7 +22,7 @@ export function Hero() {
       <div className="container relative z-10 px-4 md:px-8">
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-between">
           {/* Mobile: Image first, then content */}
-          <div className="flex flex-col items-center md:items-start flex-1 order-2 md:order-1 mt-6 md:mt-0">
+          <div className="flex flex-col items-center md:items-start flex-1 order-2 md:order-1 md:mt-6 md:mt-0">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Sandeep Vishnoi
-              <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent block md:inline-block mt-1 md:ml-2 pb-1">
+              <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent block md:inline-block mt-1 pb-1">
                 Backend Engineer
               </span>
             </motion.h1>

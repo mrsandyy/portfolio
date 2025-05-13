@@ -69,7 +69,7 @@ export function About() {
                 <span className="text-base text-portfolio-800">Backend Exp.</span>
               </div>
               <div className="flex flex-col items-center gap-1">
-                <span className="text-4xl font-bold text-portfolio-700">10k+</span>
+                <span className="text-4xl font-bold text-portfolio-700">8/10k+</span>
                 <span className="text-base text-portfolio-800">Users Served</span>
               </div>
               <div className="flex flex-col items-center gap-1">
