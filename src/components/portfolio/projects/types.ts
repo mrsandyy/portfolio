@@ -1,3 +1,4 @@
+
 export interface CaseStudy {
   headline: string;
   challenges: string;
@@ -17,10 +18,9 @@ export interface Project {
   caseStudy: CaseStudy;
 }
 
-export type ProjectCategory = "All" | "Node.js" | "TypeScript" | "Backend";
+export type ProjectCategory = "All" | string;
 
 export interface ProjectsConfig {
-  categories: ProjectCategory[];
   initialVisibleCount: number;
   loadMoreCount: number;
 } 

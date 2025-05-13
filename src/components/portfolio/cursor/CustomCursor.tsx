@@ -1,9 +1,17 @@
+
 import { useEffect, useState } from "react";
+import { useBreakpoint } from "@/hooks/use-mobile";
 
 export function CustomCursor() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isPointer, setIsPointer] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
+  const { isMobile, isTablet } = useBreakpoint();
+  
+  // Don't render the custom cursor on touch devices
+  if (isMobile || isTablet) {
+    return null;
+  }
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
@@ -23,6 +31,7 @@ export function CustomCursor() {
     const onMouseDown = () => setIsClicking(true);
     const onMouseUp = () => setIsClicking(false);
 
+    // Only add listeners and hide cursor on non-touch devices
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mouseup", onMouseUp);

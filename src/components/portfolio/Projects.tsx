@@ -5,16 +5,37 @@ import { CaseStudyModal } from "./CaseStudyModal";
 import { ProjectCard } from "./projects/ProjectCard";
 import { projectsData } from "./projects/projectsData";
 import { useBreakpoint } from "@/hooks/use-mobile";
-import { Project, ProjectCategory, ProjectsConfig } from "./projects/types";
+import { Project, ProjectCategory } from "./projects/types";
 
-const projectsConfig: ProjectsConfig = {
-  categories: ["All", "Node.js", "TypeScript", "Backend"],
+// Get the top 5 most frequent tags from all projects
+const getTopTags = (projects: Project[], count: number = 5): ProjectCategory[] => {
+  // Count occurrences of each tag
+  const tagCounts: Record<string, number> = {};
+  
+  projects.forEach(project => {
+    project.tags.forEach(tag => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    });
+  });
+  
+  // Sort tags by frequency and get top ones
+  const sortedTags = Object.entries(tagCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, count)
+    .map(([tag]) => tag as ProjectCategory);
+  
+  // Always include "All" as the first category
+  return ["All", ...sortedTags];
+};
+
+const projectsConfig = {
   initialVisibleCount: 3,
   loadMoreCount: 3,
 };
 
 export function Projects() {
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
+  const categories = getTopTags(projectsData);
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>(categories[0]);
   const [visibleProjects, setVisibleProjects] = useState(projectsConfig.initialVisibleCount);
   const { isMobile } = useBreakpoint();
 
@@ -26,10 +47,7 @@ export function Projects() {
     activeCategory === "All"
       ? projectsData
       : projectsData.filter((project) => 
-          project.tags.includes(activeCategory) || 
-          (activeCategory === "Backend" && project.tags.some(tag => 
-            ["Node.js", "PostgreSQL", "Redis", "Docker"].includes(tag)
-          ))
+          project.tags.includes(activeCategory)
         );
 
   return (
@@ -49,7 +67,7 @@ export function Projects() {
         
         {/* Project Categories */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {projectsConfig.categories.map((category) => (
+          {categories.map((category) => (
             <Button
               key={category}
               variant={activeCategory === category ? "default" : "outline"}
