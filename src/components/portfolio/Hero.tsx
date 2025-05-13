@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Database, Server, Cpu, Terminal, Braces } from "lucide-react";
@@ -17,11 +18,11 @@ const coreSkills = [
 
 export function Hero() {
   return (
-    <section id="home" className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-portfolio-50 to-white relative overflow-hidden">
-      <div className="container relative z-10">
-        <div className="flex flex-col md:flex-row gap-12 md:gap-6 items-center justify-between">
+    <section id="home" className="min-h-screen pt-16 pb-12 md:pt-24 md:pb-16 bg-gradient-to-br from-portfolio-50 to-white relative overflow-hidden">
+      <div className="container relative z-10 px-4 md:px-8">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-between">
           {/* Mobile: Image first, then content */}
-          <div className="flex flex-col items-center md:items-start flex-1 order-2 md:order-1">
+          <div className="flex flex-col items-center md:items-start flex-1 order-2 md:order-1 mt-6 md:mt-0">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }}
@@ -37,19 +38,19 @@ export function Hero() {
             </motion.div>
             
             <motion.h1 
-              className="font-bold text-4xl sm:text-5xl text-portfolio-800 mb-4 text-center md:text-left leading-[1.2]"
+              className="font-bold text-4xl sm:text-5xl text-portfolio-800 mb-5 text-center md:text-left leading-[1.2]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Sandeep Vishnoi
-              <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent block md:inline-block mt-1 pb-1">
+              <span className="text-gradient bg-gradient-to-r from-portfolio-700 via-blue-500 to-purple-500 bg-clip-text text-transparent block md:inline-block mt-1 md:ml-2 pb-1">
                 Backend Engineer
               </span>
             </motion.h1>
             
             <motion.p
-              className="text-lg text-portfolio-600 mb-6 text-center md:text-left"
+              className="text-lg text-portfolio-600 mb-7 text-center md:text-left max-w-md"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -58,7 +59,7 @@ export function Hero() {
             </motion.p>
             
             <motion.div 
-              className="flex flex-wrap gap-3 mt-5 mb-8 justify-center md:justify-start"
+              className="flex flex-wrap gap-3 mb-8 justify-center md:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5, staggerChildren: 0.1 }}
@@ -81,13 +82,13 @@ export function Hero() {
           </div>
           
           {/* Mobile: Image at the top */}
-          <div className="flex-1 flex flex-col items-center order-1 md:order-2">
+          <div className="flex-1 flex flex-col items-center order-1 md:order-2 mb-4 md:mb-0">
             <HeroImage />
           </div>
         </div>
 
         {/* Highlights at the bottom for both mobile and desktop */}
-        <div className="mt-16 md:mt-20">
+        <div className="mt-12 md:mt-20">
           <HeroHighlights />
         </div>
       </div>

@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { useBreakpoint } from "@/hooks/use-mobile";
 
@@ -33,13 +34,13 @@ export function HeroImage() {
 
   return (
     <motion.div 
-      className="relative mb-6 md:mb-10 w-full max-w-md mx-auto"
+      className="relative w-full max-w-md mx-auto"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.3 }}
     >
       <div className="relative">
-        <div className="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl">
+        <div className="w-48 h-48 md:w-56 md:h-56 mx-auto rounded-full overflow-hidden border-4 border-white shadow-xl">
           <img 
             src="MrSandy-4.jpg"
             alt="Sandeep Vishnoi"
