@@ -88,7 +88,7 @@
 
   body {
     @apply bg-background text-foreground;
-    cursor: none;
+    /* cursor: none; */
   }
   
   /* Smooth scrolling for the entire site */
@@ -188,7 +188,7 @@
   /* Improved cursor implementation */
   @media (pointer: fine) {
     * {
-      cursor: none !important;
+      /* cursor: none !important; */
     }
   }
 

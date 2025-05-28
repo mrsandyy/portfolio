@@ -10,7 +10,7 @@ import { Experience } from "@/components/portfolio/Experience";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
 import { Loader } from "@/components/portfolio/Loader";
-import { CustomCursor } from "@/components/portfolio/cursor/CustomCursor";
+// import { CustomCursor } from "@/components/portfolio/cursor/CustomCursor";
 import { motion } from "framer-motion";
 import { useBreakpoint } from "@/hooks/use-mobile";
 
@@ -37,7 +37,7 @@ const Index = () => {
       transition={{ duration: 0.8 }}
     >
       <Loader />
-      <CustomCursor />
+      {/* <CustomCursor /> */}
       <Navbar />
       <Hero />
       
