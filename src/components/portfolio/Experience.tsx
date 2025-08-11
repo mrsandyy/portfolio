@@ -45,13 +45,20 @@ const workExperience = [
 const education = [
   {
     id: 1,
-    degree: "Bachelor of Computer Applications (BCA)",
-    institution: "SS Jain Subodh PG College, Jaipur",
-    duration: "2022 - Present",
-    description: "Focused on software development, cybersecurity, computer graphics, and web technologies. Built real-world academic tools like Subodh Notifier & StudyBits while exploring automation, SaaS, and AI-driven solutions."
+    degree: "Master of Computer Applications (MCA)",
+    institution: "National Institute of Technology, Raipur",
+    duration: "2025 - 2028",
+    description: "Pursuing MCA from NIT RR"
   },
   {
     id: 2,
+    degree: "Bachelor of Computer Applications (BCA)",
+    institution: "SS Jain Subodh PG College, Jaipur",
+    duration: "2022 - 2025",
+    description: "Focused on software development, cybersecurity, computer graphics, and web technologies. Built real-world academic tools like Subodh Notifier & StudyBits while exploring automation, SaaS, and AI-driven solutions."
+  },
+  {
+    id: 3,
     degree: "Higher Secondary Education",
     institution: "Affiliated Institution under Rajasthan Board",
     duration: "2019 - 2021",
